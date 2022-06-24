@@ -87,6 +87,6 @@ view: inventory_items {
   measure: count {
     type: count
     label: "Number of inventory items"
-    drill_fields: [id, product_name, products.name, products.id, order_items.count]
+    drill_fields: [id, product_name, products.id, order_items.count]
   }
 }

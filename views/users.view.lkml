@@ -134,6 +134,7 @@ view: users {
 
   measure: count {
     type: count
+    label: "Number of users"
     drill_fields: [detail*]
   }
 
@@ -156,11 +157,9 @@ view: users {
       last_name,
       first_name,
       order_items.count,
-      order_items_final.count,
+
       orders.count,
       events.count,
-      order_items_test.count,
-      order_items_test2.count
     ]
   }
 }
