@@ -10,6 +10,7 @@ view: users {
   dimension: id {
     primary_key: yes
     type: number
+    label: "User ID"
     sql: ${TABLE}.id ;;
   }
 

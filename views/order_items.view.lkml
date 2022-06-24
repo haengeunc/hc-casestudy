@@ -102,11 +102,13 @@ view: order_items {
 
   measure: total_sale_price {
     type: sum
+    value_format_name: gbp
     sql: ${sale_price} ;;
   }
 
   measure: average_sale_price {
     type: average
+    value_format_name: gbp
     sql: ${sale_price} ;;
   }
 

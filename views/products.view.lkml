@@ -6,6 +6,7 @@ view: products {
   dimension: id {
     primary_key: yes
     type: number
+    label: "Product ID"
     sql: ${TABLE}.id ;;
   }
 

@@ -6,6 +6,7 @@ view: events {
   dimension: id {
     primary_key: yes
     type: number
+    label: "Event ID"
     sql: ${TABLE}.id ;;
   }
 
@@ -46,6 +47,7 @@ view: events {
 
   dimension: ip_address {
     type: string
+    hidden: yes
     sql: ${TABLE}.ip_address ;;
   }
 
@@ -93,6 +95,7 @@ view: events {
 
   dimension: uri {
     type: string
+    hidden: yes
     sql: ${TABLE}.uri ;;
   }
 
@@ -109,6 +112,7 @@ view: events {
 
   measure: count {
     type: count
+    label: "Number of traffic"
     drill_fields: [id, users.last_name, users.id, users.first_name]
   }
 }
