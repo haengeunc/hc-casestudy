@@ -66,6 +66,7 @@ view: users {
 
   # New customers = any users that have signed up on the website within the last 90 days
   dimension: is_new_customer {
+    description: "Yes means the user signed up within the last 90 days"
     type: yesno
     sql: ${days_since_signup} <= 90 ;;
   }
@@ -106,6 +107,14 @@ view: users {
     type: number
     sql: ${TABLE}.longitude ;;
   }
+
+  dimension: location {
+    type:  location
+    sql_latitude: ${latitude};;
+    sql_longitude: ${longitude} ;;
+  }
+
+
 
   dimension: state {
     type: string
