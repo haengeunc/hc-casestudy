@@ -18,6 +18,13 @@ view: users {
     sql: ${TABLE}.age ;;
   }
 
+  dimension: age_group {
+    type: tier
+    tiers: [15, 26, 36, 51, 66]
+    style:  integer
+    sql: ${age} ;;
+  }
+
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;
@@ -105,10 +112,6 @@ view: users {
     sql: ${TABLE}.state ;;
   }
 
-  dimension: traffic_source {
-    type: string
-    sql: ${TABLE}.traffic_source ;;
-  }
 
   dimension: zip {
     type: zipcode
@@ -123,6 +126,18 @@ view: users {
     type: count
     drill_fields: [detail*]
   }
+
+  measure: average_number_of_days_since_signup {
+    type:  average
+    sql: ${days_since_signup}  ;;
+  }
+
+  measure: average_number_of_months_since_signup {
+    type:  average
+    sql: ${months_since_signup}  ;;
+  }
+
+
 
   # ----- Sets of fields for drilling ------
   set: detail {
