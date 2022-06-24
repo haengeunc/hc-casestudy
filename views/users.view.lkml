@@ -157,7 +157,6 @@ view: users {
       last_name,
       first_name,
       order_items.count,
-
       orders.count,
       events.count,
     ]
