@@ -5,7 +5,7 @@ include: "/views/**/*.view"
 
 datagroup: haengeun_case_study_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
+  max_cache_age: "24 hours" #Default value 1 hour cache - not needed as data only refreshes overnight
 }
 
 persist_with: haengeun_case_study_default_datagroup
