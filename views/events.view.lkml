@@ -62,6 +62,7 @@ view: events {
   }
 
   dimension: location {
+    label: "Events location"
     type:  location
     sql_latitude: ${latitude} ;;
     sql_longitude:  ${longitude} ;;
