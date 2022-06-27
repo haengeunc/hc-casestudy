@@ -29,12 +29,14 @@ view: users {
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;
+    group_label: "Location"
   }
 
   dimension: country {
     type: string
     map_layer_name: countries
     sql: ${TABLE}.country ;;
+    group_label: "Location"
   }
 
   dimension_group: created {
@@ -81,17 +83,20 @@ view: users {
   dimension: first_name {
     type: string
     sql: ${TABLE}.first_name ;;
+    group_label: "Name"
   }
 
   dimension: last_name {
     type: string
     sql: ${TABLE}.last_name ;;
+    group_label: "Name"
   }
 
 
   dimension: full_name {
     type: string
     sql: ${first_name} || " " || ${last_name} ;;
+    group_label: "Name"
   }
 
   dimension: gender {
@@ -102,17 +107,21 @@ view: users {
   dimension: latitude {
     type: number
     sql: ${TABLE}.latitude ;;
+    group_label: "Location"
   }
 
   dimension: longitude {
     type: number
     sql: ${TABLE}.longitude ;;
+    group_label: "Location"
   }
 
   dimension: location {
+    label: "User location"
     type:  location
     sql_latitude: ${latitude};;
     sql_longitude: ${longitude} ;;
+    group_label: "Location"
   }
 
 
@@ -120,12 +129,14 @@ view: users {
   dimension: state {
     type: string
     sql: ${TABLE}.state ;;
+    group_label: "Location"
   }
 
 
   dimension: zip {
     type: zipcode
     sql: ${TABLE}.zip ;;
+    group_label: "Location"
   }
 
 #####################################
@@ -134,7 +145,6 @@ view: users {
 
   measure: count {
     type: count
-    label: "Number of users"
     drill_fields: [detail*]
   }
 
