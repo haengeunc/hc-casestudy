@@ -10,6 +10,7 @@ datagroup: haengeun_case_study_default_datagroup {
 }
 
 persist_with: haengeun_case_study_default_datagroup
+#testing gitHub branch
 
 
 #######################################################
@@ -97,13 +98,10 @@ explore: events {
 
 explore: users {
   conditionally_filter: {
-    filters: [created_date: "1 month"]
-    unless: [id, country]
+    filters: [users.created_date: "90 days"]
+    unless: [users.id, users.city]
   }
-
-}
-
-
+  }
 #######################################################
 #------------------------------------------------------
 
