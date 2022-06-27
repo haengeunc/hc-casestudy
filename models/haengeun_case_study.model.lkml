@@ -5,6 +5,7 @@ include: "/views/**/*.view"
 
 datagroup: haengeun_case_study_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
+  sql_trigger:  SELECT count(*) FROM order_items ;;
   max_cache_age: "24 hours" #Default value 1 hour cache - not needed as data only refreshes overnight
 }
 
@@ -94,7 +95,13 @@ explore: events {
 #######################################################
 #------------------------------------------------------
 
-explore: users {}
+explore: users {
+  conditionally_filter: {
+    filters: [created_date: "1 month"]
+    unless: [id, country]
+  }
+
+}
 
 
 #######################################################

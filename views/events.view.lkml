@@ -112,7 +112,6 @@ view: events {
 
   measure: count {
     type: count
-    label: "Number of traffic"
     drill_fields: [id, users.last_name, users.id, users.first_name]
   }
 }
