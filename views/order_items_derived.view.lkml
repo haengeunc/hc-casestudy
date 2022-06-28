@@ -6,16 +6,15 @@ view: order_items_derived {
 
         MIN(created_at) as first_order,
         MAX(created_at) as latest_order,
-        COUNT(DISTINCT order_items.order_id) as lifetime_order_count,
-        SUM(sale_price) as lifetime_total_revenue,
+        COUNT(DISTINCT order_items.order_id) as count_lifetime_order,
+        SUM(sale_price) as lifetime_revenue,
 
         rank() over (partition by user_id order by created_at asc) as order_sequence_number,
         rank() over (partition by user_id order by sale_price asc) as order_rank_by_sale_price,
 
 
       FROM order_items
-      GROUP BY user_id, created_at, sale_price
-      ;;
+      GROUP BY user_id, created_at, sale_price;;
   }
 
   measure: count {
@@ -24,8 +23,10 @@ view: order_items_derived {
   }
 
   measure: average_count {
+    label: "Average Lifetime Orders"
+    description: "Average number of orders placed by a customer over the course of their lifetime"
     type: average
-    sql: ${lifetime_order_count} ;;
+    sql: ${count_lifetime_order} ;;
   }
 
 
@@ -34,14 +35,27 @@ view: order_items_derived {
     sql: ${TABLE}.user_id ;;
   }
 
-  dimension: lifetime_order_count {
+  dimension: count_lifetime_order {
+    description: "Total number of orders placed over the course of customers' lifetimes"
     type: number
-    sql: ${TABLE}.lifetime_order_count ;;
+    sql: ${TABLE}.count_lifetime_order ;;
   }
 
   dimension: lifetime_revenue {
     type: number
     sql: ${TABLE}.lifetime_revenue ;;
+  }
+
+  measure: lifetime_average_revenue {
+    label: "Average lifetime revenue"
+    type: average
+    sql: ${lifetime_revenue} ;;
+  }
+
+  measure: lifetime_total_revenue {
+    label: "Total lifetime revenue"
+    type: sum
+    sql: ${lifetime_revenue} ;;
   }
 
   dimension_group: created_at {
@@ -53,8 +67,16 @@ view: order_items_derived {
     description: "Total number of orders that a customer has placed since first using the website"
     type: tier
     tiers: [2, 3, 6, 10]
-    sql: ${lifetime_order_count} ;;
+    sql: ${count_lifetime_order} ;;
     style:  integer
+  }
+
+  dimension: customer_lifetime_revenue {
+    type: tier
+    tiers: [5,20,50,100,500,1000]
+    value_format: "$#.00"
+    style: integer
+    sql: ${lifetime_revenue} ;;
   }
 
   dimension: order_sequence_number {
@@ -67,8 +89,43 @@ view: order_items_derived {
     sql: ${TABLE}.order_rank_by_sale_price ;;
   }
 
+  dimension: first_order {
+    label: "First Order Date"
+    type: date
+    sql: ${TABLE}.first_order;;
+  }
+
+  dimension: latest_order {
+    label: "Latest Order Date"
+    type: date
+    sql: ${TABLE}.latest_order;;
+  }
+
+  dimension: is_active_customer{
+    description: "Yes if customer purchased from the website within the last 90 days"
+    type: yesno
+    sql: ${days_since_latest_order} <= 90 ;;
+  }
+
+  dimension: days_since_latest_order {
+    type: number
+    sql: date_diff(current_date, ${latest_order}, day) ;;
+  }
+
+
+  measure: average_days_since_latest_order {
+    type: average
+    sql: ${days_since_latest_order} ;;
+  }
+
+  dimension: is_repeat_customer{
+    type: yesno
+    sql: ${count_lifetime_order} > 1 ;;
+  }
+
+
 
   set: detail {
-    fields: [user_id, lifetime_order_count, lifetime_revenue, created_at_time, order_sequence_number]
+    fields: [user_id, count_lifetime_order, lifetime_revenue, created_at_time, order_sequence_number]
   }
 }
