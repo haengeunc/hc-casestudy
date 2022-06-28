@@ -97,6 +97,14 @@ view: order_items {
 
   measure: count {
     type: count
+    label: "Count of Order Items"
+    drill_fields: [detail*]
+  }
+
+  measure: count_order {
+    type: count_distinct
+    label: "Count of Orders"
+    sql:  ${order_id} ;;
     drill_fields: [detail*]
   }
 

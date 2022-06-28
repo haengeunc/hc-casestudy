@@ -53,6 +53,7 @@ view: products {
 
   measure: count {
     type: count
+    label: "count number of products"
     drill_fields: [id, name, distribution_centers.name, distribution_centers.id, inventory_items.count]
   }
 }
