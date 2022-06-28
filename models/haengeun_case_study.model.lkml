@@ -109,6 +109,8 @@ explore: users {
 
 
 explore: products {
+  label: "Explore products"
+  description: "To analyse data related to products and distribution centers"
   join: distribution_centers {
     type: left_outer
     sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
@@ -121,4 +123,4 @@ explore: products {
 #------------------------------------------------------
 
 
-explore: fact_table {}
+explore: order_items_derived {}

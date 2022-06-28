@@ -144,6 +144,7 @@ view: users {
 
 
   measure: count {
+    label: "Count of Users"
     type: count
     drill_fields: [detail*]
   }

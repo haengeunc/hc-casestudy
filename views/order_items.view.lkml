@@ -127,6 +127,12 @@ view: order_items {
     drill_fields: [detail*]
   }
 
+  measure: profit {
+    type: number
+    value_format_name: gbp
+    sql: ${sale_price} - ${products.cost} ;;
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [

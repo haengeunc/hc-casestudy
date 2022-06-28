@@ -1,13 +1,16 @@
-view: fact_table {
+view: order_items_derived {
   derived_table: {
     sql: SELECT
         order_items.user_id as user_id,
+        created_at,
 
-      COUNT(DISTINCT order_items.order_id) as lifetime_order_count,
-      SUM(sale_price) as lifetime_revenue,
-      created_at,
-      rank() over (partition by user_id order by created_at asc) as order_sequence_number,
-      rank() over (partition by user_id order by sale_price asc) as order_rank_by_sale_price,
+        MIN(created_at) as first_order,
+        MAX(created_at) as latest_order,
+        COUNT(DISTINCT order_items.order_id) as lifetime_order_count,
+        SUM(sale_price) as lifetime_total_revenue,
+
+        rank() over (partition by user_id order by created_at asc) as order_sequence_number,
+        rank() over (partition by user_id order by sale_price asc) as order_rank_by_sale_price,
 
 
       FROM order_items
@@ -19,6 +22,12 @@ view: fact_table {
     type: count
     drill_fields: [detail*]
   }
+
+  measure: average_count {
+    type: average
+    sql: ${lifetime_order_count} ;;
+  }
+
 
   dimension: user_id {
     type: number
@@ -38,6 +47,14 @@ view: fact_table {
   dimension_group: created_at {
     type: time
     sql: ${TABLE}.created_at ;;
+  }
+
+  dimension: customer_lifetime_orders {
+    description: "Total number of orders that a customer has placed since first using the website"
+    type: tier
+    tiers: [2, 3, 6, 10]
+    sql: ${lifetime_order_count} ;;
+    style:  integer
   }
 
   dimension: order_sequence_number {
