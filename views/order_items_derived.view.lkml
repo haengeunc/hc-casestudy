@@ -2,19 +2,20 @@ view: order_items_derived {
   derived_table: {
     sql: SELECT
         order_items.user_id as user_id,
-        created_at,
+
 
         MIN(created_at) as first_order,
         MAX(created_at) as latest_order,
         COUNT(DISTINCT order_items.order_id) as count_lifetime_order,
         SUM(sale_price) as lifetime_revenue,
 
-        rank() over (partition by user_id order by created_at asc) as order_sequence_number,
-        rank() over (partition by user_id order by sale_price asc) as order_rank_by_sale_price,
+        --rank() over (partition by user_id order by created_at asc) as order_sequence_number,
+        --rank() over (partition by user_id order by sale_price asc) as order_rank_by_sale_price,
 
 
       FROM order_items
-      GROUP BY user_id, created_at, sale_price;;
+      GROUP BY user_id
+      --, created_at, sale_price;;
 
       datagroup_trigger: datagroup_daily_refresh
   }
@@ -33,6 +34,7 @@ view: order_items_derived {
 
 
   dimension: user_id {
+    primary_key: yes
     type: number
     sql: ${TABLE}.user_id ;;
   }
@@ -65,7 +67,7 @@ view: order_items_derived {
     sql: ${TABLE}.created_at ;;
   }
 
-  dimension: customer_lifetime_orders {
+  dimension: customer_lifetime_orders_group {
     description: "Total number of orders that a customer has placed since first using the website"
     type: tier
     tiers: [2, 3, 6, 10]
@@ -73,9 +75,9 @@ view: order_items_derived {
     style:  integer
   }
 
-  dimension: customer_lifetime_revenue {
+  dimension: customer_lifetime_revenue_group {
     type: tier
-    tiers: [4.99,20,50,100,500,1000]
+    tiers: [4.99,19.99,49.99,99.99,499.99,999.99]
     value_format: "$#.00"
     style: relational
     sql: ${lifetime_revenue} ;;
@@ -128,6 +130,6 @@ view: order_items_derived {
 
 
   set: detail {
-    fields: [user_id, count_lifetime_order, lifetime_revenue, created_at_time, order_sequence_number]
+    fields: [user_id, count_lifetime_order, lifetime_revenue, order_sequence_number]
   }
 }

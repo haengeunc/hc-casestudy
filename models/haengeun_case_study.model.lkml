@@ -29,6 +29,12 @@ explore: order_items {
     relationship: many_to_one
   }
 
+    join: order_items_derived {
+      type: left_outer
+      sql_on: ${users.id} = ${order_items_derived.user_id} ;;
+      relationship: one_to_one
+    }
+
   join: inventory_items {
     type: left_outer
     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
@@ -122,8 +128,6 @@ explore: products {
 #######################################################
 #------------------------------------------------------
 
-
-explore: order_items_derived {}
 
 #######################################################
 #------------------------------------------------------
