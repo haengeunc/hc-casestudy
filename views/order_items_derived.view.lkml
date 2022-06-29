@@ -15,6 +15,8 @@ view: order_items_derived {
 
       FROM order_items
       GROUP BY user_id, created_at, sale_price;;
+
+      datagroup_trigger: datagroup_daily_refresh
   }
 
   measure: count {
@@ -73,9 +75,9 @@ view: order_items_derived {
 
   dimension: customer_lifetime_revenue {
     type: tier
-    tiers: [5,20,50,100,500,1000]
+    tiers: [4.99,20,50,100,500,1000]
     value_format: "$#.00"
-    style: integer
+    style: relational
     sql: ${lifetime_revenue} ;;
   }
 

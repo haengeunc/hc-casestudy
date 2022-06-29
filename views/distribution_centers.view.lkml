@@ -26,7 +26,9 @@ view: distribution_centers {
     type:  location
     sql_latitude: ${latitude} ;;
     sql_longitude:  ${longitude} ;;
+  required_access_grants: [can_view_financial_data]
   }
+
 
   dimension: name {
     type: string

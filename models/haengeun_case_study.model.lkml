@@ -3,13 +3,13 @@ connection: "thelook_bq"
 # include all the views
 include: "/views/**/*.view"
 
-datagroup: haengeun_case_study_default_datagroup {
+datagroup: datagroup_daily_refresh {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
   sql_trigger:  SELECT count(*) FROM order_items ;;
   max_cache_age: "24 hours" #Default value 1 hour cache - not needed as data only refreshes overnight
 }
 
-persist_with: haengeun_case_study_default_datagroup
+persist_with: datagroup_daily_refresh
 #testing gitHub branch
 
 
@@ -124,3 +124,12 @@ explore: products {
 
 
 explore: order_items_derived {}
+
+#######################################################
+#------------------------------------------------------
+
+#--control what views/fields become visible to users
+access_grant: can_view_financial_data {
+  user_attribute: department
+  allowed_values: ["finance"]
+}
