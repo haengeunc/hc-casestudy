@@ -1,4 +1,5 @@
 view: order_items_derived {
+
   derived_table: {
     sql: SELECT
         order_items.user_id as user_id,
