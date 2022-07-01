@@ -7,6 +7,7 @@ view: order_items {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+    label: "Order Items ID"
     link: {
       label: "Contact support"
       url: "mailto:haengeun@looker.com"
@@ -209,7 +210,7 @@ view: order_items {
   }
 
   measure: average_spend_per_customer {
-    type: average
+    type: number
     description: "Total sale price / total number of customers"
     sql: ${total_sale_price} / NULLIF( ${count_customers},0)  ;;
   }
