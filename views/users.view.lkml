@@ -64,8 +64,9 @@ view: users {
     ]
     sql_start: ${created_date} ;;
     sql_end: current_date ;;
-
   }
+
+
 
   # New customers = any users that have signed up on the website within the last 90 days
   dimension: is_new_customer {
@@ -139,6 +140,9 @@ view: users {
     sql: ${TABLE}.zip ;;
     group_label: "Location"
   }
+
+   #####################################
+
 
 #####################################
 #-----MEASURES------------------------
