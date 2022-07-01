@@ -98,7 +98,7 @@ view: order_items {
     label: "Customer with returns %"
     type: number
     value_format_name: percent_1
-    sql: ${count_customer_with_returned_items} / NULLIF( ${count_customers},0) ;;
+    sql: SAFE_DIVIDE(${count_customer_with_returned_items}, ${count_customers}) ;; #BigQuery function to divide whilst handling 0 division situation
   }
 
   measure: count_customers {
@@ -204,8 +204,6 @@ view: order_items {
     type:  running_total
     sql:  ${total_sale_price} ;;
     value_format_name: gbp
-    filters: [status: "Complete, Processing, Shipped"]
-    description: "Cumulative total sales from items sold"
     drill_fields: [detail*]
   }
 

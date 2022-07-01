@@ -3,6 +3,7 @@ connection: "thelook_bq"
 # include all the views
 include: "/views/**/*.view"
 include: "/explore/explore_order_items"
+include: "/explore/explore_products"
 
 datagroup: datagroup_daily_refresh {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
@@ -71,19 +72,7 @@ explore: users {
 }
 
 
-#######################################################
-#------------------------------------------------------
 
-
-explore: products {
-  label: "Explore products"
-  description: "To analyse data related to products and distribution centers"
-  join: distribution_centers {
-    type: left_outer
-    sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
-    relationship: many_to_one
-  }
-}
 
 
 #######################################################

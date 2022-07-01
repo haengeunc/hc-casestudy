@@ -72,6 +72,7 @@ view: users {
     description: "Yes means the user signed up within the last 90 days"
     type: yesno
     sql: ${days_since_signup} <= 90 ;;
+
   }
 
 
