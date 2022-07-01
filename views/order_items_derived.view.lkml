@@ -15,11 +15,26 @@ view: order_items_derived {
 
 
       FROM order_items
-      GROUP BY user_id
-      --, created_at, sale_price;;
+      WHERE {% condition order_status_filter %} orders.status {% endcondition %}
+
+      GROUP BY user_id ;;
+
 
       datagroup_trigger: datagroup_daily_refresh
   }
+
+
+
+## -------- Using parameter to create dynamic derived table?
+  filter: order_status_filter {
+    type: string
+    suggest_explore: order_items
+    suggest_dimension: orders.status
+    }
+
+
+
+# -----------------------------------------------------------
 
   measure: count {
     type: count

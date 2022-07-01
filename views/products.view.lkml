@@ -83,7 +83,7 @@ view: products {
     drill_fields: [id, name, distribution_centers.name, distribution_centers.id, inventory_items.count]
   }
 
-  measure: profit {
+  measure: gross_margin {
     type: sum
     sql: ${retail_price} - ${cost} ;;
     value_format_name: gbp
