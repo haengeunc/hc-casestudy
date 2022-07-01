@@ -4,6 +4,7 @@ connection: "thelook_bq"
 include: "/views/**/*.view"
 include: "/explore/explore_order_items"
 include: "/explore/explore_products"
+include: "/explore/explore_users"
 
 datagroup: datagroup_daily_refresh {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
@@ -60,16 +61,6 @@ explore: events {
   }
 }
 
-
-#######################################################
-#------------------------------------------------------
-
-explore: users {
-  conditionally_filter: {
-    filters: [users.created_date: "90 days"]
-    unless: [users.id, users.city]
-    }
-}
 
 
 

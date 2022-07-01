@@ -178,8 +178,16 @@ view: order_items {
     type: sum
     value_format_name: gbp
     sql: ${sale_price} ;;
+    description: "Total revenue from all items, including returned"
+    html: <font color="blue">{{rendered_value}}</font> ;;
+  }
+
+  measure: total_revenue_complete {
+    type: sum
+    value_format_name: gbp
+    sql: ${sale_price} ;;
     filters: [status: "Complete, Processing, Shipped"]
-    description: "Total sales from items sold"
+    description: "Total revenue from items sold"
     html: <font color="blue">{{rendered_value}}</font> ;;
   }
 
