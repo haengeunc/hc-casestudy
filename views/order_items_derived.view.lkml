@@ -21,6 +21,11 @@ view: order_items_derived {
 
   }
 
+  dimension: user_id {
+    primary_key: yes
+    type: number
+    sql: ${TABLE}.user_id ;;
+  }
 
 
 ## -------- Using parameter to create dynamic derived table?
@@ -47,11 +52,7 @@ view: order_items_derived {
   }
 
 
-  dimension: user_id {
-    primary_key: yes
-    type: number
-    sql: ${TABLE}.user_id ;;
-  }
+
 
   dimension: count_lifetime_order {
     description: "Total number of orders placed over the course of customers' lifetimes"

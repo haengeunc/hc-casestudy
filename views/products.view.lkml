@@ -72,6 +72,14 @@ view: products {
     sql: ${TABLE}.retail_price ;;
   }
 
+  dimension: retail_price_group {
+    type: tier
+    sql: ${retail_price} ;;
+    tiers: [0,250,500,750,1000]
+    style:  integer
+  }
+
+
   dimension: sku {
     type: string
     sql: ${TABLE}.sku ;;
