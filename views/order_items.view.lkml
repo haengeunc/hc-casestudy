@@ -133,10 +133,10 @@ view: order_items {
     sql: ${TABLE}.status ;;
 
     #Link to dashboard customer behaviour, with selected filter applied
-    link: {
-      label: "Customer Info"
-      url: "/dashboards/1?Category={{_filters['products.category'] | url_encode }}&Status={{ value | url_encode }}"
-      }
+    # link: {
+    #   label: "Customer Info"
+    #   url: "/dashboards/1?Category={{_filters['products.category'] | url_encode }}&Status={{ value | url_encode }}"
+    #   }
 
   }
 
@@ -179,7 +179,7 @@ view: order_items {
     value_format_name: gbp
     sql: ${sale_price} ;;
     description: "Total revenue from all items, including returned"
-    html: <font color="blue">{{rendered_value}}</font> ;;
+    #html: <font color="blue">{{rendered_value}}</font> ;;
   }
 
   measure: total_revenue_complete {
@@ -219,6 +219,7 @@ view: order_items {
     type: number
     description: "Total sale price / total number of customers"
     sql: ${total_sale_price} / NULLIF( ${count_customers},0)  ;;
+    value_format_name: gbp
   }
 
 #Gross Margin
@@ -238,6 +239,7 @@ view: order_items {
     value_format_name: gbp
     sql: ${gross_margin}  ;;
     filters: [status: "Complete, Processing, Shipped"]
+    drill_fields: [product_detail*]
     description: "Total gross margin from items sold"
   }
 
@@ -247,6 +249,7 @@ view: order_items {
     value_format_name: gbp
     sql: ${gross_margin}  ;;
     filters: [status: "Complete, Processing, Shipped"]
+    drill_fields: [detail*]
     description: "Average gross margin from items sold"
   }
 
@@ -305,4 +308,17 @@ view: order_items {
       orders.order_id
     ]
   }
+
+  #Drill into specific product categories and brands
+  set: product_detail {
+    fields: [
+      users.country,
+      users.state,
+      total_gross_margin,
+      products.category,
+      products.brand
+    ]
+  }
+
+
 }

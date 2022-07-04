@@ -1,10 +1,11 @@
 view: order_items_derived {
 
   derived_table: {
+   # persist_for: "24 hours"
+    datagroup_trigger: datagroup_daily_refresh
+
     sql: SELECT
         order_items.user_id as user_id,
-
-
         MIN(created_at) as first_order,
         MAX(created_at) as latest_order,
         COUNT(DISTINCT order_items.order_id) as count_lifetime_order,
@@ -13,14 +14,11 @@ view: order_items_derived {
         --rank() over (partition by user_id order by created_at asc) as order_sequence_number,
         --rank() over (partition by user_id order by sale_price asc) as order_rank_by_sale_price,
 
-
       FROM order_items
       WHERE {% condition order_status_filter %} orders.status {% endcondition %}
 
       GROUP BY user_id ;;
 
-
-      datagroup_trigger: datagroup_daily_refresh
   }
 
 
@@ -142,6 +140,13 @@ view: order_items_derived {
     type: yesno
     sql: ${count_lifetime_order} > 1 ;;
   }
+
+  measure: count_recurring_customer {
+    type: count_distinct
+    sql: ${user_id};;
+    filters: [is_repeat_customer: "yes"]
+  }
+
 
 
 

@@ -164,6 +164,13 @@ view: users {
     sql: ${months_since_signup}  ;;
   }
 
+  measure: count_new_user {
+    type: count
+    filters: [is_new_customer: "Yes"]
+  }
+
+
+
 
 
   # ----- Sets of fields for drilling ------

@@ -5,6 +5,8 @@ include: "/views/inventory_items.view"
 include: "/views/orders.view"
 include: "/views/products.view"
 include: "/views/distribution_centers.view"
+include: "/views/events.view"
+
 
 
 
@@ -46,4 +48,12 @@ explore: order_items {
     sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
     relationship: many_to_one
   }
+  join: events {
+    type: left_outer
+    sql_on: ${events.user_id} = ${order_items.user_id} ;;
+    relationship: many_to_many
+  }
+
+
+
 }
