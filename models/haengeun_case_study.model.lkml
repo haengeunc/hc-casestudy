@@ -16,6 +16,16 @@ persist_with: datagroup_daily_refresh
 #testing gitHub branch
 
 
+#--control what views/fields become visible to users
+access_grant: can_view_financial_data {
+  user_attribute: department
+  allowed_values: ["finance"]
+}
+
+
+
+
+
 
 # #######################################################
 # #------------------------------------------------------
@@ -54,11 +64,3 @@ persist_with: datagroup_daily_refresh
 #     relationship: many_to_one
 #   }
 # }
-
-
-
-#--control what views/fields become visible to users
-access_grant: can_view_financial_data {
-  user_attribute: department
-  allowed_values: ["finance"]
-}
