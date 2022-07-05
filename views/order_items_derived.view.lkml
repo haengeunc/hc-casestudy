@@ -44,6 +44,7 @@ view: order_items_derived {
 
   measure: count {
     type: count
+    label: "Count Users"
     drill_fields: [detail*]
   }
 

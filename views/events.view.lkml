@@ -54,15 +54,18 @@ view: events {
   dimension: latitude {
     type: number
     sql: ${TABLE}.latitude ;;
+    group_label: "Location"
   }
 
   dimension: longitude {
     type: number
     sql: ${TABLE}.longitude ;;
+    group_label: "Location"
   }
 
   dimension: location {
     label: "Events location"
+    group_label: "Location"
     type:  location
     sql_latitude: ${latitude} ;;
     sql_longitude:  ${longitude} ;;
@@ -87,6 +90,7 @@ view: events {
   dimension: state {
     type: string
     sql: ${TABLE}.state ;;
+    group_label: "Location"
   }
 
   dimension: traffic_source {
@@ -109,10 +113,12 @@ view: events {
   dimension: zip {
     type: zipcode
     sql: ${TABLE}.zip ;;
+    group_label: "Location"
   }
 
   measure: count {
     type: count
+    label: "Count Event ID"
     drill_fields: [id, users.last_name, users.id, users.first_name]
   }
 }

@@ -106,40 +106,40 @@ view: users {
     sql: ${TABLE}.gender ;;
   }
 
-  dimension: latitude {
-    type: number
-    sql: ${TABLE}.latitude ;;
-    group_label: "Location"
-  }
+  #####################################
 
-  dimension: longitude {
-    type: number
-    sql: ${TABLE}.longitude ;;
-    group_label: "Location"
-  }
+    dimension: latitude {
+      type: number
+      sql: ${TABLE}.latitude ;;
+      group_label: "Location"
+    }
 
-  dimension: location {
-    label: "User location"
-    type:  location
-    sql_latitude: ${latitude};;
-    sql_longitude: ${longitude} ;;
-    group_label: "Location"
-  }
+    dimension: longitude {
+      type: number
+      sql: ${TABLE}.longitude ;;
+      group_label: "Location"
+    }
+
+    dimension: location {
+      label: "User location"
+      type:  location
+      sql_latitude: ${latitude};;
+      sql_longitude: ${longitude} ;;
+      group_label: "Location"
+    }
+
+    dimension: state {
+      type: string
+      sql: ${TABLE}.state ;;
+      group_label: "Location"
+    }
 
 
-
-  dimension: state {
-    type: string
-    sql: ${TABLE}.state ;;
-    group_label: "Location"
-  }
-
-
-  dimension: zip {
-    type: zipcode
-    sql: ${TABLE}.zip ;;
-    group_label: "Location"
-  }
+    dimension: zip {
+      type: zipcode
+      sql: ${TABLE}.zip ;;
+      group_label: "Location"
+    }
 
    #####################################
 

@@ -1,6 +1,5 @@
 view: distribution_centers {
-  sql_table_name: `thelook.distribution_centers`
-    ;;
+  sql_table_name: `thelook.distribution_centers`;;
   drill_fields: [id]
 
   dimension: id {
@@ -38,6 +37,7 @@ view: distribution_centers {
 
 #---------------------------------------------------------
   measure: count {
+    label: "Count of Distribution Centre ID"
     type: count
     drill_fields: [id, name, products.count]
   }

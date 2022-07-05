@@ -1,7 +1,7 @@
 connection: "thelook_bq"
 
 # include all the views
-include: "/views/**/*.view"
+# include: "/views/**/*.view" ---best practice not to include all views - specify which one
 include: "/explore/explore_order_items"
 include: "/explore/explore_products"
 include: "/explore/explore_users"
@@ -13,7 +13,6 @@ datagroup: datagroup_daily_refresh {
 }
 
 persist_with: datagroup_daily_refresh
-#testing gitHub branch
 
 
 #--control what views/fields become visible to users
@@ -25,7 +24,7 @@ access_grant: can_view_financial_data {
 
 
 
-
+#best practice not create all explores - be specific in what you are looking for
 
 # #######################################################
 # #------------------------------------------------------
