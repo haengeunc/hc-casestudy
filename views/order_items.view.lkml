@@ -88,14 +88,14 @@ view: order_items {
 
   measure: count_returned_items {
     type: count
-    filters: [status: "Returned"]
+    filters: [order_items.status: "Returned"]
   }
 
   measure: count_customer_with_returned_items {
     type: count_distinct
     sql: ${user_id} ;;
     description: "Number of users who have returned an item at some point"
-    filters: [status: "Returned"]
+    filters: [order_items.status: "Returned"]
   }
 
   measure: percent_item_returned {
@@ -183,7 +183,7 @@ view: order_items {
     label: "Count of Items Sold"
     description: "When an order is placed, the item ordered is immediately marked as sold within the warehouse"
     type: count
-    filters: [status: "Complete, Processing, Shipped"]
+    filters: [order_items.status: "Complete, Processing, Shipped"]
   }
 
 
@@ -199,7 +199,7 @@ view: order_items {
     type: sum
     value_format_name: gbp
     sql: ${sale_price} ;;
-    filters: [status: "Complete, Processing, Shipped"]
+    filters: [order_items.status: "Complete, Processing, Shipped"]
     description: "Total revenue from items sold"
     html: <font color="blue">{{rendered_value}}</font> ;;
   }
@@ -208,7 +208,7 @@ view: order_items {
     type: average
     value_format_name: gbp
     sql: ${sale_price} ;;
-    filters: [status: "Complete, Processing, Shipped"]
+    filters: [order_items.status: "Complete, Processing, Shipped"]
     description: "Average sales from items sold"
 
     #Format based on the conditions logic
@@ -251,7 +251,7 @@ view: order_items {
     type: sum
     value_format_name: gbp
     sql: ${gross_margin}  ;;
-    filters: [status: "Complete, Processing, Shipped"]
+    filters: [order_items.status: "Complete, Processing, Shipped"]
     drill_fields: [product_detail*]
     description: "Total gross margin from items sold"
   }
@@ -261,7 +261,7 @@ view: order_items {
     type: average
     value_format_name: gbp
     sql: ${gross_margin}  ;;
-    filters: [status: "Complete, Processing, Shipped"]
+    filters: [order_items.status: "Complete, Processing, Shipped"]
     drill_fields: [detail*]
     description: "Average gross margin from items sold"
   }

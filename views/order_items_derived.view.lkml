@@ -2,7 +2,7 @@ view: order_items_derived {
 
   derived_table: {
    # persist_for: "24 hours"
-    datagroup_trigger: datagroup_daily_refresh
+   # datagroup_trigger: datagroup_daily_refresh --- not needed since dynamic filter being applied
 
     sql: SELECT
         order_items.user_id as user_id,
@@ -17,7 +17,8 @@ view: order_items_derived {
        -- rank() over (partition by user_id order by sale_price asc) as order_rank_by_sale_price,
 
       FROM order_items
-      WHERE {% condition order_status_filter %} orders.status {% endcondition %}
+      --build dynamic filter to create the derived table
+      WHERE {% condition order_status_filter %} order_items.status {% endcondition %}
 
       GROUP BY user_id ;;
 
