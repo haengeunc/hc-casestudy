@@ -11,8 +11,8 @@ view: order_items_derived {
         COUNT(DISTINCT order_items.order_id) as count_lifetime_order,
         SUM(sale_price) as lifetime_revenue,
 
-        --rank() over (partition by user_id order by created_at asc) as order_sequence_number,
-        --rank() over (partition by user_id order by sale_price asc) as order_rank_by_sale_price,
+        rank() over (partition by user_id order by created_at asc) as order_sequence_number,
+        rank() over (partition by user_id order by sale_price asc) as order_rank_by_sale_price,
 
       FROM order_items
       WHERE {% condition order_status_filter %} orders.status {% endcondition %}
@@ -74,6 +74,7 @@ view: order_items_derived {
   measure: lifetime_total_revenue {
     label: "Total lifetime revenue"
     type: sum
+    value_format_name: gbp_0
     sql: ${lifetime_revenue} ;;
   }
 
@@ -92,9 +93,11 @@ view: order_items_derived {
 
   dimension: customer_lifetime_revenue_group {
     type: tier
-    tiers: [4.99,19.99,49.99,99.99,499.99,999.99]
+    tiers: [5, 20, 50, 100, 500, 1000]
     value_format: "$#.00"
-    style: relational
+   style: interval
+  # tiers: [4.99,19.99,49.99,99.99,499.99,999.99]
+  # style: relational
     sql: ${lifetime_revenue} ;;
   }
 

@@ -43,6 +43,19 @@ view: order_items {
     sql: ${TABLE}.delivered_at ;;
   }
 
+  dimension_group: duration_item_received_since_order{
+    type:  duration
+    intervals: [
+      day,
+      week,
+      month,
+      year
+    ]
+    sql_start: ${created_date} ;;
+    sql_end: ${delivered_date}  ;;
+  }
+
+
   dimension: inventory_item_id {
     type: number
     # hidden: yes

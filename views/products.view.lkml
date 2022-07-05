@@ -75,7 +75,7 @@ view: products {
   dimension: retail_price_group {
     type: tier
     sql: ${retail_price} ;;
-    tiers: [0,250,500,750,1000]
+    tiers: [0,50,100,150,200,250,300]
     style:  integer
   }
 
