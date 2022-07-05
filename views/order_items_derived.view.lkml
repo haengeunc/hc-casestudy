@@ -11,8 +11,10 @@ view: order_items_derived {
         COUNT(DISTINCT order_items.order_id) as count_lifetime_order,
         SUM(sale_price) as lifetime_revenue,
 
-        rank() over (partition by user_id order by created_at asc) as order_sequence_number,
-        rank() over (partition by user_id order by sale_price asc) as order_rank_by_sale_price,
+
+      --causing query error - to check why
+       -- rank() over (partition by user_id order by created_at asc) as order_sequence_number,
+       -- rank() over (partition by user_id order by sale_price asc) as order_rank_by_sale_price,
 
       FROM order_items
       WHERE {% condition order_status_filter %} orders.status {% endcondition %}
@@ -143,6 +145,12 @@ view: order_items_derived {
   dimension: is_repeat_customer{
     type: yesno
     sql: ${count_lifetime_order} > 1 ;;
+  }
+
+  dimension: is_first_purchase {
+    type: yesno
+    description: "yes if first oder date and latest order same"
+    sql: ${first_order} = ${latest_order} ;;
   }
 
   measure: count_recurring_customer {
