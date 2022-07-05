@@ -115,6 +115,7 @@ view: order_items_derived {
 
   dimension: first_order {
     label: "First Order Date"
+    type: date
     sql: ${TABLE}.first_order;;
   }
 

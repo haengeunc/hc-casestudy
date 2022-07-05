@@ -16,62 +16,46 @@ persist_with: datagroup_daily_refresh
 #testing gitHub branch
 
 
-#######################################################
-#------------------------------------------------------
 
+# #######################################################
+# #------------------------------------------------------
 
-explore: distribution_centers {}
+# # explore: inventory_items {
+# #   join: products {
+# #     type: left_outer
+# #     sql_on: ${inventory_items.product_id} = ${products.id} ;;
+# #     relationship: many_to_one
+#   }
 
-
-#######################################################
-#------------------------------------------------------
-
-explore: inventory_items {
-  join: products {
-    type: left_outer
-    sql_on: ${inventory_items.product_id} = ${products.id} ;;
-    relationship: many_to_one
-  }
-
-  join: distribution_centers {
-    type: left_outer
-    sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
-    relationship: many_to_one
-  }
-}
+#   join: distribution_centers {
+#     type: left_outer
+#     sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
+#     relationship: many_to_one
+#   }
+# }
 
 #######################################################
 #------------------------------------------------------
 
-explore: orders {
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
+# explore: orders {
+#   join: users {
+#     type: left_outer
+#     sql_on: ${orders.user_id} = ${users.id} ;;
+#     relationship: many_to_one
+#   }
+# }
 
 #######################################################
-#------------------------------------------------------
-explore: events {
-  join: users {
-    type: left_outer
-    sql_on: ${events.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
+# #------------------------------------------------------
+# explore: events {
+#   join: users {
+#     type: left_outer
+#     sql_on: ${events.user_id} = ${users.id} ;;
+#     relationship: many_to_one
+#   }
+# }
 
 
-
-
-
-
-#######################################################
-#------------------------------------------------------
-
-
-#######################################################
-#------------------------------------------------------
 
 #--control what views/fields become visible to users
 access_grant: can_view_financial_data {
