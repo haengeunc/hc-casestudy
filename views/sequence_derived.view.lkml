@@ -5,9 +5,9 @@ view: sequence_derived {
       sql: SELECT
         order_items.user_id as user_id,
         rank() over (partition by user_id order by created_at asc) as order_sequence_number,
-        rank() over (partition by user_id order by sale_price asc) as order_rank_by_sale_price,
+        rank() over (partition by user_id order by sale_price asc) as order_rank_by_sale_price
 
-        FROM order_items
+        FROM order_items ;;
     }
 
     measure: count {
@@ -16,9 +16,10 @@ view: sequence_derived {
     }
 
     dimension: user_id {
+      primary_key: yes
       type: number
-      primary: yes
       sql: ${TABLE}.user_id ;;
+
     }
 
 

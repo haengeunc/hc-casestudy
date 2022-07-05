@@ -6,6 +6,7 @@ include: "/views/orders.view"
 include: "/views/products.view"
 include: "/views/distribution_centers.view"
 include: "/views/events.view"
+include: "/views/sequence_derived.view"
 
 
 
@@ -52,6 +53,12 @@ explore: order_items {
     type: left_outer
     sql_on: ${events.user_id} = ${order_items.user_id} ;;
     relationship: many_to_many
+  }
+
+  join: sequence_derived {
+    type: left_outer
+    sql_on: ${order_items.user_id} = ${sequence_derived.user_id} ;;
+    relationship: many_to_one
   }
 
 
