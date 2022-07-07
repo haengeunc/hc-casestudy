@@ -7,7 +7,7 @@ include: "/views/products.view"
 include: "/views/distribution_centers.view"
 # include: "/views/events.view"
 include: "/views/sequence_derived.view"
-
+include: "/views/order_items_ndt.view"
 
 
 
@@ -22,8 +22,14 @@ explore: order_items {
 
   join: order_items_derived {
     type: left_outer
-    sql_on: ${users.id} = ${order_items_derived.user_id} ;;
-    relationship: one_to_one
+    sql_on: ${order_items.id} = ${order_items_derived.user_id} ;;
+    relationship: many_to_one
+  }
+
+  join: order_items_ndt {
+    type: left_outer
+    sql_on: ${order_items.id} = ${order_items_ndt.user_id} ;;
+    relationship: many_to_one
   }
 
   join: inventory_items {
@@ -63,6 +69,7 @@ explore: order_items {
     sql_on: ${order_items.user_id} = ${sequence_derived.user_id} ;;
     relationship: many_to_one
   }
+
 
 
 
