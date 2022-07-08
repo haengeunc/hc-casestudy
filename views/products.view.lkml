@@ -27,6 +27,20 @@ view: products {
     }
   }
 
+  measure: category_count {
+    type: sum
+    sql: CASE WHEN ${category} = '{% parameter category_to_count %}'
+              THEN 1
+              ELSE 0
+          END
+        ;;
+  }
+
+  parameter: category_to_count {
+    type: string
+  }
+
+
   dimension: category {
     type: string
     sql: ${TABLE}.category ;;
