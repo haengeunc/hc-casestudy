@@ -13,6 +13,7 @@ view: products {
   dimension: brand {
     type: string
     sql: ${TABLE}.brand ;;
+
     link: {
       label: "Google"
       url: "http://www.google.com/search?q={{ value }}"
@@ -29,6 +30,11 @@ view: products {
       url: "https://sandbox.looker.haengeun.com/explore/haengeun_case_study/order_items?fields=order_items.count,users.count,products.brand&f[products.brand]={{ value }}&sorts=order_items.count_order+desc+0&limit=500"
     }
 
+
+    link: {
+      label: "Brand Comparisons Dashboard"
+      url: "https://sandbox.looker.haengeun.com/dashboards/3?Category={{_filters['products.category']|url_encode}}&Brand={{ value | url_encode}}"
+    }
 
   }
 
