@@ -62,6 +62,11 @@ view: order_items {
     sql_end: ${delivered_date}  ;;
   }
 
+  measure: average_days_item_received_since_order{
+    type: average
+    sql: ${days_duration_item_received_since_order} ;;
+    value_format: "#.##"
+  }
 
   dimension: inventory_item_id {
     type: number

@@ -69,6 +69,11 @@ view: products {
     type: string
     sql: ${TABLE}.category ;;
 
+    link: {
+      label: "Brand Comparisons Dashboard"
+      url: "https://sandbox.looker.haengeun.com/dashboards/3?Category={{ value |url_encode}}&Brand={{ _filters['products.brand'] | url_encode}}"
+    }
+
     html:
       {% if _user_attributes['department'] == "Finance" %}
       <p style="color: #5A2FC2; background-color: #E5E5E6; font-size:
@@ -77,7 +82,9 @@ view: products {
       <p style="color: #166088; background-color: #B3F5F7; font-size:
       100%; font-weight: bold; text-align:center">{{value}}</p>
       {% endif %}
-      ;;
+            ;;
+
+
 
 
   }
