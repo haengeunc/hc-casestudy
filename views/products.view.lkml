@@ -23,10 +23,17 @@ view: products {
       label: "Facebook"
       url: "https://www.facebook.com/{{value}}/"
       icon_url: "https://facebook.com/favicon.ico"
-
     }
+    link: {
+      label: "Order Items Explore"
+      url: "https://sandbox.looker.haengeun.com/explore/haengeun_case_study/order_items?fields=order_items.count,users.count,products.brand&f[products.brand]={{ value }}&sorts=order_items.count_order+desc+0&limit=500"
+    }
+
+
   }
 
+#----------------------------------------------------------
+#create a dynamic measure using a liquid parameter
   measure: category_count {
     type: sum
     sql: CASE WHEN ${category} = '{% parameter category_to_count %}'
@@ -36,9 +43,20 @@ view: products {
         ;;
   }
 
+  #using type "string" will cause it to error when SQL generated as double single quotes get generated
   parameter: category_to_count {
-    type: string
+    type: unquoted
   }
+#----------------------------------------------------------
+
+
+  measure: category_count_dynamic2{
+    type: number
+    sql: SUM(${category}) WHERE {% condition category %} category {% endcondition%} ;;
+  }
+
+
+
 
 
   dimension: category {
@@ -48,10 +66,10 @@ view: products {
     html:
       {% if _user_attributes['department'] == "Finance" %}
       <p style="color: #5A2FC2; background-color: #E5E5E6; font-size:
-      180%; font-weight: bold; text-align:center">{{value}}</p>
+      100%; font-weight: bold; text-align:center">{{value}}</p>
       {% else %}
       <p style="color: #166088; background-color: #B3F5F7; font-size:
-      180%; font-weight: bold; text-align:center">{{value}}</p>
+      100%; font-weight: bold; text-align:center">{{value}}</p>
       {% endif %}
       ;;
 
@@ -66,7 +84,7 @@ view: products {
   dimension: department {
     type: string
     sql: ${TABLE}.department ;;
-    html:  <p style="color: #166088; background-color: #B3F5F7; font-size: 150%; fontweight: bold; text-align:center">{{value}}</p> ;;
+    html:  <p style="color: #166088; background-color: #B3F5F7; font-size: 100%; fontweight: bold; text-align:center">{{value}}</p> ;;
   }
 
   dimension: distribution_center_id {

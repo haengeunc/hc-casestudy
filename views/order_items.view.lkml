@@ -26,6 +26,13 @@ view: order_items {
       year
     ]
     sql: ${TABLE}.created_at ;;
+
+  }
+
+  dimension: Current_Date{
+    type: date
+    sql: (CURRENT_TIMESTAMP()) ;;
+    html: {{ rendered_value | date: "%d-%m-%Y" }} ;;
   }
 
   dimension_group: delivered {
@@ -145,11 +152,17 @@ view: order_items {
     type: string
     sql: ${TABLE}.status ;;
 
-  #  Link to dashboard customer behaviour, with selected filter applied ---try both in html + link
+   # Link to dashboard customer behaviour, with selected filter applied ---try both in html + link
     # link: {
     #   label: "Customer Info"
     #   url: "/dashboards/1?Category={{_filters['products.category'] | url_encode }}&Status={{ value | url_encode }}"
     #   }
+
+
+    # link: {
+    #   label: "Customer Info"
+    #   url: "/dashboards/1?Category={{_filters['products.category']| url_encode }}&Status={{ value | url_encode }}"
+    # }
 
   }
 
@@ -294,7 +307,7 @@ measure: first_order {
 
   }
 
-  parameter: category {
+  parameter: category_filter {
       type: string
       allowed_value: {
         label: "Choose"
