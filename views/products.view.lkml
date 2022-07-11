@@ -32,7 +32,7 @@ view: products {
     }
     link: {
       label: "Brand Comparisons Dashboard"
-      url: "https://sandbox.looker.haengeun.com/dashboards/3?Category={{_filters['products.category']|url_encode}}&Brand={{ value | url_encode}}"
+      url: "https://sandbox.looker.haengeun.com/dashboards/3?Category={{_filters['products.category']|url_encode}}&Brand+Select={{ value | url_encode}}"
     }
   }
 
