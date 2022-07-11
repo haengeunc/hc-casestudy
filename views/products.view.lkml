@@ -40,13 +40,15 @@ view: products {
 
   dimension: brands_other {
     type: string
-    sql: CASE WHEN {% condition brand_select %} ${brand} {% endcondition %} THEN ${brand}
+    sql: CASE WHEN {% condition brand_select %} ${products.brand} {% endcondition %} THEN ${products.brand}
               ELSE 'All other Brands'
           END;;
   }
 
   filter: brand_select {
     type: string
+    suggest_explore: explore_order_items
+    suggest_dimension: brand
   }
 
 #----------------------------------------------------------
