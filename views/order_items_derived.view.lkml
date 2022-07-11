@@ -99,7 +99,7 @@ view: order_items_derived {
     type: tier
     tiers: [5, 20, 50, 100, 500, 1000]
     value_format: "$#.00"
-   style: interval
+   style: integer
   # tiers: [4.99,19.99,49.99,99.99,499.99,999.99]
   # style: relational
     sql: ${lifetime_revenue} ;;
