@@ -26,6 +26,13 @@ view: order_items {
       year
     ]
     sql: ${TABLE}.created_at ;;
+
+  }
+
+  dimension: Current_Date{
+    type: date
+    sql: (CURRENT_TIMESTAMP()) ;;
+    html: {{ rendered_value | date: "%d-%m-%Y" }} ;;
   }
 
   dimension_group: delivered {
@@ -55,6 +62,11 @@ view: order_items {
     sql_end: ${delivered_date}  ;;
   }
 
+  measure: average_days_item_received_since_order{
+    type: average
+    sql: ${days_duration_item_received_since_order} ;;
+    value_format: "#.##"
+  }
 
   dimension: inventory_item_id {
     type: number
@@ -145,11 +157,17 @@ view: order_items {
     type: string
     sql: ${TABLE}.status ;;
 
-    #Link to dashboard customer behaviour, with selected filter applied
+   # Link to dashboard customer behaviour, with selected filter applied ---try both in html + link
     # link: {
     #   label: "Customer Info"
     #   url: "/dashboards/1?Category={{_filters['products.category'] | url_encode }}&Status={{ value | url_encode }}"
     #   }
+
+
+    # link: {
+    #   label: "Customer Info"
+    #   url: "/dashboards/1?Category={{_filters['products.category']| url_encode }}&Status={{ value | url_encode }}"
+    # }
 
   }
 
@@ -187,11 +205,14 @@ view: order_items {
   }
 
 
+
   measure: total_sale_price {
     type: sum
     value_format_name: gbp
     sql: ${sale_price} ;;
     description: "Total revenue from all items, including returned"
+    drill_fields: [detail*]
+
     #html: <font color="blue">{{rendered_value}}</font> ;;
   }
 
@@ -200,6 +221,7 @@ view: order_items {
     value_format_name: gbp
     sql: ${sale_price} ;;
     filters: [order_items.status: "Complete, Processing, Shipped"]
+
     description: "Total revenue from items sold"
     html: <font color="blue">{{rendered_value}}</font> ;;
   }
@@ -278,9 +300,19 @@ view: order_items {
 
 
 
+measure: first_order {
+  type: date
+  sql: MIN(${created_date}) ;;
 
+}
 
-  parameter: category {
+  measure: latest_order {
+    type: date
+    sql: MAX(${created_date}) ;;
+
+  }
+
+  parameter: category_filter {
       type: string
       allowed_value: {
         label: "Choose"
@@ -318,7 +350,7 @@ view: order_items {
       id,
       users.full_name,
       inventory_items.product_name,
-      orders.order_id
+      order_items.order_id
     ]
   }
 

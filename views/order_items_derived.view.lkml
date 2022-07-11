@@ -13,8 +13,8 @@ view: order_items_derived {
 
 
       --causing query error - to check why
-       -- rank() over (partition by user_id order by created_at asc) as order_sequence_number,
-       -- rank() over (partition by user_id order by sale_price asc) as order_rank_by_sale_price,
+   --   rank() over (partition by user_id order by created_at asc) as order_sequence_number,
+   --   rank() over (partition by user_id order by sale_price asc) as order_rank_by_sale_price,
 
       FROM order_items
       --build dynamic filter to create the derived table
@@ -99,21 +99,24 @@ view: order_items_derived {
     type: tier
     tiers: [5, 20, 50, 100, 500, 1000]
     value_format: "$#.00"
-   style: interval
+   style: integer
   # tiers: [4.99,19.99,49.99,99.99,499.99,999.99]
   # style: relational
     sql: ${lifetime_revenue} ;;
   }
 
-  dimension: order_sequence_number {
-    type: number
-    sql: ${TABLE}.order_sequence_number ;;
-  }
 
-  dimension: order_rank_by_sale_price {
-    type: number
-    sql: ${TABLE}.order_rank_by_sale_price ;;
-  }
+####To DELETE - dimension that are created when producing PDT and later deleted
+#   dimension: order_sequence_number {
+#     type: number
+#     sql: ${TABLE}.order_sequence_number ;;
+#   }
+
+# ####To DELETE - dimension that are created when producing PDT and later deleted
+#   dimension: order_rank_by_sale_price {
+#     type: number
+#     sql: ${TABLE}.order_rank_by_sale_price ;;
+#   }
 
   dimension: first_order {
     label: "First Order Date"
@@ -153,6 +156,15 @@ view: order_items_derived {
     type: yesno
     description: "yes if first oder date and latest order same"
     sql: ${first_order} = ${latest_order} ;;
+
+    html:{% if value == "Yes" %}
+
+      <p style="color: green">{{ rendered_value }}</p>
+
+    {% elsif value == 'No' %}
+    <p style="color: red">{{ rendered_value }}</p>
+    {% endif %};;
+
   }
 
   measure: count_recurring_customer {
@@ -165,6 +177,6 @@ view: order_items_derived {
 
 
   set: detail {
-    fields: [user_id, count_lifetime_order, lifetime_revenue, order_sequence_number]
+    fields: [user_id, count_lifetime_order, lifetime_revenue]
   }
 }
