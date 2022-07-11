@@ -10,6 +10,8 @@ view: products {
     sql: ${TABLE}.id ;;
   }
 
+#----------------------------------------------------------
+#-------Create external links to navigate to explore/google/dashboard
   dimension: brand {
     type: string
     sql: ${TABLE}.brand ;;
@@ -19,7 +21,6 @@ view: products {
       url: "http://www.google.com/search?q={{ value }}"
       icon_url: "http://google.com/favicon.ico"
       }
-
     link: {
       label: "Facebook"
       url: "https://www.facebook.com/{{value}}/"
@@ -29,13 +30,23 @@ view: products {
       label: "Order Items Explore"
       url: "https://sandbox.looker.haengeun.com/explore/haengeun_case_study/order_items?fields=order_items.count,users.count,products.brand&f[products.brand]={{ value }}&sorts=order_items.count_order+desc+0&limit=500"
     }
-
-
     link: {
       label: "Brand Comparisons Dashboard"
       url: "https://sandbox.looker.haengeun.com/dashboards/3?Category={{_filters['products.category']|url_encode}}&Brand={{ value | url_encode}}"
     }
+  }
 
+#----------------------------------------------------------
+
+  dimension: brands_other {
+    type: string
+    sql: CASE WHEN {% condition brand_select %} ${brand} {% endcondition %} THEN ${brand}
+              ELSE 'All other Brands'
+          END;;
+  }
+
+  filter: brand_select {
+    type: string
   }
 
 #----------------------------------------------------------
