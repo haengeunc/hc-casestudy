@@ -22,6 +22,22 @@ access_grant: can_view_financial_data {
 }
 
 
+# refinement to extend the explore to give greater access
+
+explore: +users {
+  required_access_grants: [level_access]
+  join: order_items {
+    sql_on:  ${users.id} = ${order_items.id} ;;
+  }
+}
+
+  access_grant: level_access {
+    user_attribute: level
+    allowed_values: ["b"]
+  }
+
+
+
 
 
 #best practice not create all explores - be specific in what you are looking for
