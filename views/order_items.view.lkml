@@ -3,6 +3,9 @@ view: order_items {
     ;;
   drill_fields: [id]
 
+  suggestions: yes
+
+
   dimension: id {
     primary_key: yes
     type: number
@@ -13,6 +16,7 @@ view: order_items {
       url: "mailto:haengeun@looker.com"
     }
   }
+
 
   dimension_group: created {
     type: time
