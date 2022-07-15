@@ -26,7 +26,7 @@ access_grant: can_view_financial_data {
 
 explore: +products {
   required_access_grants: [level_access]
-  label: "products_levelb_access"
+  label: "products_level_a_access"
   join: inventory_items {
     sql_on:  ${products.id} = ${inventory_items.product_id}} ;;
     relationship: one_to_many
@@ -35,7 +35,7 @@ explore: +products {
 
   access_grant: level_access {
     user_attribute: level
-    allowed_values: ["b"]
+    allowed_values: ["a"]
   }
 
 
