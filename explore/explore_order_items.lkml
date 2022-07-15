@@ -1,14 +1,18 @@
-include: "/views/order_items.view"
-include: "/views/users.view"
-include: "/views/order_items_derived.view"
-include: "/views/inventory_items.view"
-include: "/views/orders.view"
-include: "/views/products.view"
-include: "/views/distribution_centers.view"
-# include: "/views/events.view"
-include: "/views/sequence_derived.view"
-include: "/views/order_items_ndt.view"
+include: "/views/orders/order_items.view"
+include: "/views/orders/orders.view"
+include: "/views/orders/order_items_ndt.view"
+include: "/views/orders/order_items_derived.view"
+include: "/views/orders/order_sequence_derived.view"
 
+
+include: "/views/products/products.view"
+include: "/views/products/inventory_items.view"
+include: "/views/products/distribution_centers.view"
+
+
+
+
+include: "/views/users/users.view"
 
 
 #######################################################

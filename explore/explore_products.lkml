@@ -1,6 +1,6 @@
 
-include: "/views/products.view"
-include: "/views/distribution_centers.view"
+include: "/views/products/products.view"
+include: "/views/products/distribution_centers.view"
 
 #######################################################
 #------------------------------------------------------

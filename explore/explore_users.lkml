@@ -1,7 +1,7 @@
 
-include: "/views/users.view"
-include: "/views/events.view"
-include: "/views/order_items.view"
+include: "/views/users/users.view"
+include: "/views/users/events.view"
+include: "/views/orders/order_items.view"
 
 #######################################################
 #------------------------------------------------------

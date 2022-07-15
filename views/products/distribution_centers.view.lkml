@@ -4,6 +4,7 @@ view: distribution_centers {
 
   dimension: id {
     primary_key: yes
+    hidden: yes
     type: number
     sql: ${TABLE}.id ;;
   }
@@ -11,17 +12,20 @@ view: distribution_centers {
   dimension: latitude {
     type: number
     sql: ${TABLE}.latitude ;;
+    group_label: "Location"
 
   }
 
   dimension: longitude {
     type: number
     sql: ${TABLE}.longitude ;;
+    group_label: "Location"
 
   }
 
   dimension: location {
     label: "Distribution centre location"
+    group_label: "Location"
     type:  location
     sql_latitude: ${latitude} ;;
     sql_longitude:  ${longitude} ;;
