@@ -286,6 +286,7 @@ view: order_items {
     filters: [order_items.status: "Complete, Processing, Shipped"]
     drill_fields: [detail*]
     description: "Average gross margin from items sold"
+
   }
 
 
@@ -296,6 +297,7 @@ view: order_items {
     value_format_name:percent_1
     sql: ${total_gross_margin}/NULLIF( ${total_sale_price} ,0) ;;
     description: "Gross margin percentage from items sold"
+    required_access_grants: [can_view_financial_data]
   }
 
 
