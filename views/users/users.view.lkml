@@ -3,6 +3,7 @@ view: users {
     ;;
   drill_fields: [id]
 
+
 #####################################
 #-----DIMENSIONS---------------------
 
@@ -30,6 +31,7 @@ view: users {
     type: string
     sql: ${TABLE}.city ;;
     group_label: "Location"
+
   }
 
   dimension: country {

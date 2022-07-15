@@ -15,11 +15,17 @@ datagroup: datagroup_daily_refresh {
 persist_with: datagroup_daily_refresh
 
 
-#--control what views/fields become visible to users
+#--control what views/fields become visible to users "column-level security"
 access_grant: can_view_financial_data {
   user_attribute: department
   allowed_values: ["Finance"]
 }
+
+access_grant: level_access {
+  user_attribute: level
+  allowed_values: ["a"]
+}
+
 
 
 # refinement to extend the explore to give greater access
@@ -33,10 +39,7 @@ explore: +products {
   }
 }
 
-  access_grant: level_access {
-    user_attribute: level
-    allowed_values: ["a"]
-  }
+
 
 
 
