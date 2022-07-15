@@ -18,7 +18,7 @@ persist_with: datagroup_daily_refresh
 #--control what views/fields become visible to users
 access_grant: can_view_financial_data {
   user_attribute: department
-  allowed_values: ["finance"]
+  allowed_values: ["Finance"]
 }
 
 
