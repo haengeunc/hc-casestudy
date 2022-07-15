@@ -24,10 +24,12 @@ access_grant: can_view_financial_data {
 
 # refinement to extend the explore to give greater access
 
-explore: +users {
+explore: +products {
   required_access_grants: [level_access]
-  join: order_items {
-    sql_on:  ${users.id} = ${order_items.id} ;;
+  label: "products_levelb_access"
+  join: inventory_items {
+    sql_on:  ${products.id} = ${inventory_items.product_id}} ;;
+    relationship: one_to_many
   }
 }
 

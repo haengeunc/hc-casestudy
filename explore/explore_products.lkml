@@ -7,9 +7,7 @@ include: "/views/products/distribution_centers.view"
 
 
 explore: products {
-  label: "Explore products"
   description: "To analyse data related to products and distribution centers"
-
 
  join: distribution_centers {
     type: left_outer
