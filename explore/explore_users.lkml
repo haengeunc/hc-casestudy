@@ -8,7 +8,6 @@ include: "/views/orders/order_items.view"
 
 explore: users {
 
-
   #products is not accessible via users explore - needs to remove gross margin calculation since it's using products table
   fields: [ALL_FIELDS*,
           -order_items.gross_margin,
