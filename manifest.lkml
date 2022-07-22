@@ -1,3 +1,4 @@
+# release on git as production
 project_name: "haengeun_case_study"
 
 constant: environment {
