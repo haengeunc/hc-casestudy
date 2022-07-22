@@ -1,4 +1,6 @@
-connection: "thelook_bq"
+# "thelook_bq" - connection using constant defined in manifest file
+connection: "@{model_connection}"
+
 
 # include all the views
 # include: "/views/**/*.view" ---best practice not to include all views - specify which one ----
