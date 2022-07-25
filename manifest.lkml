@@ -1,4 +1,4 @@
-# release on git as production -16:58 - 25 Jul 2022 - 10:19 - 10.25
+# release on git as production -16:58 - 25 Jul 2022 - 10:19 - 10.25 - xxx
 project_name: "haengeun_case_study"
 
 constant: environment {
@@ -9,4 +9,5 @@ constant: environment {
 #using constant variable allows multi staging in a single instance
 constant: model_connection {
   value: "thelook_bq"
+
 }
