@@ -2,6 +2,8 @@
 connection: "@{model_connection}"
 
 
+### this is a comment to test pull requests
+
 # include all the views
 # include: "/views/**/*.view" ---best practice not to include all views - specify which one ----
 include: "/explore/explore_order_items"
