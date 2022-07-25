@@ -1,4 +1,4 @@
-# release on git as production -16:58 - 25 Jul 2022 - 10:19
+# release on git as production -16:58 - 25 Jul 2022 - 10:19 - 10.25
 project_name: "haengeun_case_study"
 
 constant: environment {
