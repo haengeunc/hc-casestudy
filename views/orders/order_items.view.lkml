@@ -216,6 +216,9 @@ view: order_items {
     #html: <font color="blue">{{rendered_value}}</font> ;;
   }
 
+  #feedback from demo to the team - consider having year-to-date measures to use in the graph
+  #consider reviewing map feature to avoid maps being broken
+
   measure: total_revenue_complete {
     type: sum
     value_format_name: gbp
