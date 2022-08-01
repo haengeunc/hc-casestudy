@@ -26,7 +26,7 @@ explore: order_items {
 
   join: order_items_derived {
     type: left_outer
-    sql_on: ${order_items.id} = ${order_items_derived.user_id} ;;
+    sql_on: ${order_items.user_id} = ${order_items_derived.user_id} ;;
     relationship: many_to_one
   }
 
