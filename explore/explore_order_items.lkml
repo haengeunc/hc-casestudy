@@ -18,7 +18,9 @@ include: "/views/users/users.view"
 #######################################################
 #------------------------------------------------------
 explore: order_items {
-  sql_always_where: ${orders.status} = 'completed' ;;
+
+  #sql_always_where: ${orders.status} = 'Complete' ;;
+
   join: users {
     type: left_outer
     sql_on: ${order_items.user_id} = ${users.id} ;;
