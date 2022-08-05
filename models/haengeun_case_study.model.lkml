@@ -10,6 +10,7 @@ include: "/explore/explore_users"
 datagroup: datagroup_daily_refresh {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
   sql_trigger:  SELECT count(*) FROM order_items ;;
+  description: "triggered when a new order items added to the order items table"
   max_cache_age: "24 hours" #Default value 1 hour cache - not needed as data only refreshes overnight
 }
 
