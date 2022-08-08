@@ -1,8 +1,6 @@
 view: order_items_derived {
 
   derived_table: {
-   # persist_for: "24 hours"
-   # datagroup_trigger: datagroup_daily_refresh --- not needed since dynamic filter being applied
 
     sql: SELECT
         order_items.user_id as user_id,
@@ -10,11 +8,6 @@ view: order_items_derived {
         MAX(created_at) as latest_order,
         COUNT(DISTINCT order_items.order_id) as count_lifetime_order,
         SUM(sale_price) as lifetime_revenue,
-
-
-      --causing query error - to check why
-   --   rank() over (partition by user_id order by created_at asc) as order_sequence_number,
-   --   rank() over (partition by user_id order by sale_price asc) as order_rank_by_sale_price,
 
       FROM order_items
       --build dynamic filter to create the derived table

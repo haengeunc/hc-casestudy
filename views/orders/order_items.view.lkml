@@ -80,6 +80,7 @@ view: order_items {
     type: number
     # hidden: yes
     sql: ${TABLE}.order_id ;;
+    group_label: "HC"
   }
 
   dimension_group: returned {

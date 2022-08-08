@@ -11,6 +11,9 @@ view: order_items_ndt {
         column: first_order {}
         column: latest_order {}
     }
+
+    datagroup_trigger: datagroup_daily_refresh
+
   }
 
   dimension: user_id {
