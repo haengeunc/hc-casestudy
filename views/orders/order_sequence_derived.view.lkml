@@ -2,6 +2,7 @@ view: sequence_derived {
     derived_table: {
       datagroup_trigger: datagroup_daily_refresh
 
+
       sql: SELECT
         order_items.user_id as user_id,
         rank() over (partition by user_id order by created_at asc) as order_sequence_number,
