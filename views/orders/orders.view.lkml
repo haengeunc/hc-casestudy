@@ -4,6 +4,7 @@ view: orders {
   drill_fields: [order_id]
 
   dimension: order_id {
+
     primary_key: yes
     type: number
     sql: ${TABLE}.order_id ;;
@@ -21,6 +22,7 @@ view: orders {
       year
     ]
     sql: ${TABLE}.created_at ;;
+
   }
 
   dimension_group: delivered {

@@ -3,7 +3,9 @@ include: "/views/users/users.view"
 include: "/views/users/events.view"
 include: "/views/orders/order_items.view"
 
-#######################################################
+
+
+####################################################### this exlore is for users related analysis
 #------------------------------------------------------
 
 explore: users {
