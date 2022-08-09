@@ -20,7 +20,7 @@ include: "/views/users/users.view"
 explore: order_items {
 
   #demo/testing how to use sql_always_where - user cannot change - fixed value
-  sql_always_where: ${orders.status} = 'Complete' ;;
+  #sql_always_where: ${orders.status} = 'Complete' ;;
 
   join: users {
     type: left_outer

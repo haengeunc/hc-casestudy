@@ -24,7 +24,7 @@ view: order_items_derived {
   }
 
 
-## -------- Using parameter to create dynamic derived table?
+## -------- Using parameter to create dynamic derived table
   filter: order_status_filter {
     type: string
     suggest_explore: order_items
@@ -98,18 +98,6 @@ view: order_items_derived {
     sql: ${lifetime_revenue} ;;
   }
 
-
-####To DELETE - dimension that are created when producing PDT and later deleted
-#   dimension: order_sequence_number {
-#     type: number
-#     sql: ${TABLE}.order_sequence_number ;;
-#   }
-
-# ####To DELETE - dimension that are created when producing PDT and later deleted
-#   dimension: order_rank_by_sale_price {
-#     type: number
-#     sql: ${TABLE}.order_rank_by_sale_price ;;
-#   }
 
   dimension: first_order {
     label: "First Order Date"
