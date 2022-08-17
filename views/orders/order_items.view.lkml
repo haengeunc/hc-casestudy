@@ -191,6 +191,8 @@ view: order_items {
       }
   }
 
+
+
   measure: count_order {
     type: count_distinct
     label: "Count of Orders"
@@ -204,6 +206,14 @@ view: order_items {
     description: "When an order is placed, the item ordered is immediately marked as sold within the warehouse"
     type: count
     filters: [order_items.status: "Complete, Processing, Shipped"]
+  }
+
+
+  measure: count_item_with_status{
+    label: "Count of Items with status"
+    description: "As part of Looker PDF Cycle testing, remove values that have null status"
+    type: count
+    filters: [order_items.status: "Cancelled, Complete, Returned"]
   }
 
 
