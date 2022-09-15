@@ -125,12 +125,12 @@
     model: haengeun_case_study
     explore: order_items
     type: looker_column
-    fields: [order_items.created_month, order_items.total_sale_price, order_items.gross_margin_percent]
+    fields: [order_items.created_month, order_items.total_revenue, order_items.gross_margin_percent]
     fill_fields: [order_items.created_month]
     sorts: [order_items.created_month]
     limit: 500
     column_limit: 50
-    dynamic_fields: [{category: table_calculation, expression: 'mean(offset_list(${order_items.total_sale_price},-6,7))',
+    dynamic_fields: [{category: table_calculation, expression: 'mean(offset_list(${order_items.total_revenue},-6,7))',
         label: Rolling Average Revenue, value_format: !!null '', value_format_name: gbp,
         _kind_hint: measure, table_calculation: rolling_average_revenue, _type_hint: number,
         is_disabled: true}, {category: table_calculation, expression: 'mean(offset_list(${order_items.total_gross_margin},-6,7))',
@@ -178,7 +178,7 @@
       palette_id: 5d189dfc-4f46-46f3-822b-bfb0b61777b1
       options:
         steps: 5
-    y_axes: [{label: '', orientation: left, series: [{axisId: order_items.total_sale_price,
+    y_axes: [{label: '', orientation: left, series: [{axisId: order_items.total_revenue,
             id: order_items.total_sale_price, name: Total Sale Price}], showLabels: true,
         showValues: true, unpinAxis: false, tickDensity: default, type: linear}, {
         label: '', orientation: right, series: [{axisId: order_items.gross_margin_percent,
@@ -233,7 +233,7 @@
     model: haengeun_case_study
     explore: order_items
     type: looker_area
-    fields: [order_items.total_sale_price, users.is_new_customer, order_items.created_date]
+    fields: [order_items.total_revenue, users.is_new_customer, order_items.created_date]
     pivots: [users.is_new_customer]
     fill_fields: [users.is_new_customer, order_items.created_date]
     filters:
@@ -267,8 +267,8 @@
     show_totals_labels: false
     show_silhouette: false
     totals_color: "#808080"
-    y_axes: [{label: Daily Revenue, orientation: left, series: [{axisId: order_items.total_sale_price,
-            id: No - order_items.total_sale_price, name: 'No'}, {axisId: order_items.total_sale_price,
+    y_axes: [{label: Daily Revenue, orientation: left, series: [{axisId: order_items.total_revenue,
+            id: No - order_items.total_revenue, name: 'No'}, {axisId: order_items.total_revenue,
             id: Yes - order_items.total_sale_price, name: 'Yes'}], showLabels: true,
         showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
         type: linear}]
@@ -276,7 +276,7 @@
     hidden_series: []
     series_types: {}
     series_labels:
-      Yes - order_items.total_sale_price: New Customer
+      Yes - order_items.total_revenue: New Customer
       No - order_items.total_sale_price: Old customer
     ordering: none
     show_null_labels: false
@@ -469,7 +469,7 @@
     model: haengeun_case_study
     explore: order_items
     type: looker_column
-    fields: [order_items.created_year, order_items.total_sale_price]
+    fields: [order_items.created_year, order_items.total_revenue]
     fill_fields: [order_items.created_year]
     filters: {}
     sorts: [order_items.created_year desc]
@@ -507,7 +507,7 @@
       palette_id: 75905e81-dadc-472c-b9a2-a201f788d55d
       options:
         steps: 5
-    y_axes: [{label: Revenue, orientation: left, series: [{axisId: order_items.total_sale_price,
+    y_axes: [{label: Revenue, orientation: left, series: [{axisId: order_items.total_revenue,
             id: order_items.total_sale_price, name: Total Sale Price}], showLabels: true,
         showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
         type: linear}]
@@ -530,12 +530,12 @@
     model: haengeun_case_study
     explore: order_items
     type: looker_grid
-    fields: [order_items.gross_margin_percent, order_items.total_sale_price, products.brand]
+    fields: [order_items.gross_margin_percent, order_items.total_revenue, products.brand]
     filters:
-      order_items.total_sale_price: ''
-    sorts: [order_items.total_sale_price desc]
+      order_items.total_revenue: ''
+    sorts: [order_items.total_revenue desc]
     limit: 10
-    dynamic_fields: [{category: table_calculation, expression: "(${order_items.total_sale_price}\
+    dynamic_fields: [{category: table_calculation, expression: "(${order_items.total_revenue}\
           \ / sum(${order_items.total_sale_price}))", label: "% of Total Revenue",
         value_format: !!null '', value_format_name: percent_2, _kind_hint: measure,
         table_calculation: of_total_revenue, _type_hint: number}]
@@ -582,7 +582,7 @@
     defaults_version: 1
     series_types: {}
     show_sql_query_menu_options: false
-    column_order: ["$$$_row_numbers_$$$", products.brand, order_items.total_sale_price,
+    column_order: ["$$$_row_numbers_$$$", products.brand, order_items.total_revenue,
       of_total_revenue, order_items.gross_margin_percent]
     show_totals: true
     show_row_totals: true
@@ -592,7 +592,7 @@
     series_cell_visualizations:
       order_items.gross_margin_percent:
         is_active: false
-      order_items.total_sale_price:
+      order_items.total_revenue:
         is_active: true
       of_total_revenue:
         is_active: false
@@ -692,12 +692,12 @@
     model: haengeun_case_study
     explore: order_items
     type: looker_grid
-    fields: [order_items.gross_margin_percent, order_items.total_sale_price, products.category]
+    fields: [order_items.gross_margin_percent, order_items.total_revenue, products.category]
     filters:
-      order_items.total_sale_price: ''
-    sorts: [order_items.total_sale_price desc]
+      order_items.total_revenue: ''
+    sorts: [order_items.total_revenue desc]
     limit: 10
-    dynamic_fields: [{category: table_calculation, expression: "(${order_items.total_sale_price}\
+    dynamic_fields: [{category: table_calculation, expression: "(${order_items.total_revenue}\
           \ / sum(${order_items.total_sale_price}))", label: "% of Total Revenue",
         value_format: !!null '', value_format_name: percent_2, _kind_hint: measure,
         table_calculation: of_total_revenue, _type_hint: number}]
@@ -744,7 +744,7 @@
     defaults_version: 1
     series_types: {}
     show_sql_query_menu_options: false
-    column_order: ["$$$_row_numbers_$$$", products.category, order_items.total_sale_price,
+    column_order: ["$$$_row_numbers_$$$", products.category, order_items.total_revenue,
       of_total_revenue, order_items.gross_margin_percent]
     show_totals: true
     show_row_totals: true
@@ -754,7 +754,7 @@
     series_cell_visualizations:
       order_items.gross_margin_percent:
         is_active: false
-      order_items.total_sale_price:
+      order_items.total_revenue:
         is_active: true
       of_total_revenue:
         is_active: false
@@ -770,7 +770,7 @@
     model: haengeun_case_study
     explore: order_items
     type: single_value
-    fields: [order_items.total_sale_price, order_items.created_date]
+    fields: [order_items.total_revenue, order_items.created_date]
     fill_fields: [order_items.created_date]
     filters:
       order_items.created_date: 5 days
@@ -779,7 +779,7 @@
     column_limit: 50
     dynamic_fields: [{category: table_calculation, label: "% change from previous\
           \ day", value_format: !!null '', value_format_name: percent_0, calculation_type: percent_difference_from_previous,
-        table_calculation: change_from_previous_day, args: [order_items.total_sale_price],
+        table_calculation: change_from_previous_day, args: [order_items.total_revenue],
         _kind_hint: measure, _type_hint: number}]
     custom_color_enabled: true
     show_single_value_title: true
@@ -955,7 +955,7 @@
     series_cell_visualizations:
       order_items.total_gross_margin:
         is_active: true
-      order_items.total_sale_price:
+      order_items.total_revenue:
         is_active: true
       order_items.count:
         is_active: true

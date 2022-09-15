@@ -197,8 +197,15 @@ view: order_items {
     type: count_distinct
     label: "Count of Orders"
     sql:  ${order_id} ;;
-    drill_fields: [detail*]
     html: <p style="font-size: 15px">{{linked_value}}</p> ;;
+
+      drill_fields: [created_month, total_revenue, users.age_group]
+      link: {
+        label: "Total sale by month by age group"
+        url: "{{link}}&pivots=users.age_group"
+      }
+
+
   }
 
   measure: count_item_sold{
@@ -218,7 +225,7 @@ view: order_items {
 
 
 
-  measure: total_sale_price {
+  measure: total_revenue {
     type: sum
     value_format_name: gbp
     sql: ${sale_price} ;;
@@ -238,7 +245,8 @@ view: order_items {
     filters: [order_items.status: "Complete, Processing, Shipped"]
 
     description: "Total revenue from items sold"
-    html: <font color="blue">{{rendered_value}}</font> ;;
+   # html: <font color="blue">{{rendered_value}}</font> ;;
+    html: <p>@{currency_value_format_liquid}</p>  ;;
   }
 
   measure: average_sale_price {
@@ -260,7 +268,7 @@ view: order_items {
 
   measure: cumulative_total_sales  {
     type:  running_total
-    sql:  ${total_sale_price} ;;
+    sql:  ${total_revenue} ;;
     value_format_name: gbp
     drill_fields: [detail*]
   }
@@ -268,7 +276,7 @@ view: order_items {
   measure: average_spend_per_customer {
     type: number
     description: "Total sale price / total number of customers"
-    sql: ${total_sale_price} / NULLIF( ${count_customers},0)  ;;
+    sql: ${total_revenue} / NULLIF( ${count_customers},0)  ;;
     value_format_name: gbp
   }
 
@@ -310,7 +318,7 @@ view: order_items {
     label: "Gross Margin %"
     type: number
     value_format_name:percent_1
-    sql: ${total_gross_margin}/NULLIF( ${total_sale_price} ,0) ;;
+    sql: ${total_gross_margin}/NULLIF( ${total_revenue} ,0) ;;
     description: "Gross margin percentage from items sold"
     required_access_grants: [can_view_financial_data]
   }

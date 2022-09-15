@@ -10,8 +10,6 @@ include: "/views/products/inventory_items.view"
 include: "/views/products/distribution_centers.view"
 
 
-
-
 include: "/views/users/users.view"
 
 

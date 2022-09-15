@@ -6,7 +6,7 @@ view: order_items_ndt {
     explore_source: order_items {
       bind_all_filters: no
         column: user_id {}
-        column: total_sale_price {}
+        column: total_revenue {}
         column: count {}
         column: first_order {}
         column: latest_order {}
@@ -21,7 +21,7 @@ view: order_items_ndt {
     primary_key: yes
     type: number
   }
-  dimension: total_sale_price {
+  dimension: total_revenue {
     description: "Total revenue from all items, including returned"
     value_format_name: gbp_0
     type: number
@@ -40,9 +40,9 @@ view: order_items_ndt {
     type: number
   }
 
-  measure: lifetime_total_sale_price {
+  measure: lifetime_total_revenue {
     type: sum
-    sql: ${total_sale_price} ;;
+    sql: ${total_revenue} ;;
   }
 
 
