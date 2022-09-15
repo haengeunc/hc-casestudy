@@ -84,6 +84,28 @@ view: inventory_items {
     sql: ${TABLE}.sold_at ;;
   }
 
+  dimension: is_sold {
+    label: "Is Sold"
+    type: yesno
+    sql: ${sold_raw} is not null ;;
+  }
+
+  dimension: days_in_inventory {
+    label: "Days in Inventory"
+    description: "days between created and sold date"
+    type: number
+    sql: TIMESTAMP_DIFF(coalesce(${sold_raw}, CURRENT_TIMESTAMP()), ${created_raw}, DAY) ;;
+  }
+
+  dimension: days_in_inventory_tier {
+    label: "Days In Inventory Tier"
+    type: tier
+    sql: ${days_in_inventory} ;;
+    style: integer
+    tiers: [0, 5, 10, 20, 40, 80, 160, 360]
+  }
+
+
   measure: count {
     type: count
     label: "Count of inventory items"

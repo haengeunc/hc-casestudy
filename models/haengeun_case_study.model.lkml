@@ -6,6 +6,7 @@ connection: "@{model_connection}"
 include: "/explore/explore_order_items"
 include: "/explore/explore_products"
 include: "/explore/explore_users"
+include: "/explore/queries.lkml"
 
 datagroup: datagroup_daily_refresh {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
