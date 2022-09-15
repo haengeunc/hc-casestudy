@@ -391,6 +391,47 @@ measure: first_order {
   }
 
 
+  parameter: date_granularity_selector {
+    type: unquoted
+    default_value: "created_month"
+
+    allowed_value: {
+      value: "created_month"
+      label: "Month"
+    }
+
+    allowed_value: {
+      value: "created_week"
+      label: "Week"
+    }
+
+    allowed_value: {
+      value: "created_date"
+      label: "Date"
+    }
+  }
+
+  dimension: dynamic_timeframe {
+    label_from_parameter: date_granularity_selector
+    type: string
+    sql:
+        {% if date_granularity_selector._parameter_value == 'created_date' %}
+            ${created_date}
+        {% elsif date_granularity_selector._parameter_value == 'created_week' %}
+            ${created_week}
+        {% else %}
+            ${created_month}
+        {% endif %} ;;
+  }
+
+
+  dimension: welcome_message {
+    type: string
+    html:  Welcome {{_user_attributes['first_name']}} ;;
+    sql: 1 ;;
+  }
+
+
 
 
 }
