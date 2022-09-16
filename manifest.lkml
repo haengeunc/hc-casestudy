@@ -23,3 +23,16 @@ constant: currency_value_format_liquid {
   ${{ value | divided_by: 1 | round: 2 }}
   {% endif %}"
 }
+
+constant: two_decimal_format {
+  value: "0.##"
+}
+
+
+constant: usd_1 {
+  value: "$0.0"
+}
+
+constant: large_order_threshold {
+  value: "1000"
+}
