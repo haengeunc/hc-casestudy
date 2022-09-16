@@ -33,6 +33,7 @@ explore: +order_items {
     description: "No. of orders by month by department (men/women) in 2021"
     dimensions: [order_items.created_month]
     measures: [order_items.count_customers]
+    pivots: [users.gender]
     filters: [order_items.created_date: "2021"]
   }
 }
