@@ -199,7 +199,7 @@ view: order_items {
     sql:  ${order_id} ;;
     html: <p style="font-size: 15px">{{linked_value}}</p> ;;
 
-      drill_fields: [created_month, total_revenue, users.age_group]
+      drill_fields: [created_month, total_sale_price, users.age_group]
       link: {
         label: "Total sale by month by age group"
         url: "{{link}}&pivots=users.age_group"
@@ -225,20 +225,19 @@ view: order_items {
 
 
 
-  measure: total_revenue {
+  measure: total_sale_price {
     type: sum
     value_format_name: gbp
     sql: ${sale_price} ;;
     description: "Total revenue from all items, including returned"
     drill_fields: [detail*]
-
-    #html: <font color="blue">{{rendered_value}}</font> ;;
+    html: <font color="blue">{{rendered_value}}</font> ;;
   }
 
   #feedback from demo to the team - consider having year-to-date measures to use in the graph
   #consider reviewing map feature to avoid maps being broken
 
-  measure: total_revenue_complete {
+  measure: total_sale_price_complete {
     type: sum
     value_format_name: gbp
     sql: ${sale_price} ;;
@@ -268,7 +267,7 @@ view: order_items {
 
   measure: cumulative_total_sales  {
     type:  running_total
-    sql:  ${total_revenue} ;;
+    sql:  ${total_sale_price} ;;
     value_format_name: gbp
     drill_fields: [detail*]
   }
@@ -276,7 +275,7 @@ view: order_items {
   measure: average_spend_per_customer {
     type: number
     description: "Total sale price / total number of customers"
-    sql: ${total_revenue} / NULLIF( ${count_customers},0)  ;;
+    sql: ${total_sale_price} / NULLIF( ${count_customers},0)  ;;
     value_format_name: gbp
   }
 
@@ -286,6 +285,22 @@ view: order_items {
     value_format_name: gbp
     sql: ${sale_price} - ${products.cost} ;;
 
+  }
+
+  dimension: reporting_period {
+    description: "This Year to date versus Last Year to date"
+    group_label: "Created Date"
+    sql: CASE
+        WHEN date_part('year',${created_raw}) = date_part('year',current_date)
+        AND ${created_raw} < CURRENT_DATE
+        THEN 'This Year to Date'
+
+      WHEN date_part('year',${created_raw}) + 1 = date_part('year',current_date)
+      AND date_part('dayofyear',${created_raw}) <= date_part('dayofyear',current_date)
+      THEN 'Last Year to Date'
+
+      END
+      ;;
   }
 
 
@@ -318,7 +333,7 @@ view: order_items {
     label: "Gross Margin %"
     type: number
     value_format_name:percent_1
-    sql: ${total_gross_margin}/NULLIF( ${total_revenue} ,0) ;;
+    sql: ${total_gross_margin}/NULLIF( ${total_sale_price} ,0) ;;
     description: "Gross margin percentage from items sold"
     required_access_grants: [can_view_financial_data]
   }

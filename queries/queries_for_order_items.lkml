@@ -12,7 +12,7 @@ explore: +order_items {
     label: "Order Items Overview"
     description: "Use for pre-defined query to see orders overview"
     dimensions: [order_id]
-    measures: [total_revenue]
+    measures: [total_sale_price]
   }
 
 }
@@ -44,7 +44,7 @@ explore: +order_items {
   query: revenue_order_status_by_date{
     description: "Total revenue by order status by date in the last 30 days"
     dimensions: [order_items.created_date]
-    measures: [order_items.total_revenue]
+    measures: [order_items.total_sale_price]
     pivots: [order_items.status]
     filters: [order_items.created_date: "last 30 days"]
   }

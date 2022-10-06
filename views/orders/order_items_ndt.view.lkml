@@ -6,13 +6,16 @@ view: order_items_ndt {
     explore_source: order_items {
       bind_all_filters: no
         column: user_id {}
-        column: total_revenue {}
+        column: total_sale_price {}
         column: count {}
         column: first_order {}
         column: latest_order {}
     }
 
     datagroup_trigger: datagroup_daily_refresh
+
+    cluster_keys: ["user_id"]
+    partition_keys: ["first_order"]
 
   }
 
@@ -21,7 +24,7 @@ view: order_items_ndt {
     primary_key: yes
     type: number
   }
-  dimension: total_revenue {
+  dimension: total_sale_price {
     description: "Total revenue from all items, including returned"
     value_format_name: gbp_0
     type: number
@@ -40,9 +43,9 @@ view: order_items_ndt {
     type: number
   }
 
-  measure: lifetime_total_revenue {
+  measure: lifetime_total_sale_price {
     type: sum
-    sql: ${total_revenue} ;;
+    sql: ${total_sale_price} ;;
   }
 
 

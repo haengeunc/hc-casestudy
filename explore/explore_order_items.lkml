@@ -17,9 +17,25 @@ include: "/views/users/users.view"
 #------------------------------------------------------
 explore: order_items {
   view_name: order_items
+  # sql_always_where: ${order_items.created_date} >= "2019-01-01" ;;
+
+  # sql_always_having: ${count_order} > 10 ;;
+
+  # always_filter: {
+  #   filters: [order_items.status: "Complete", users.country: "USA"]
+  # }
+
+  # conditionally_filter: {
+  #   filters: [order_items.created_date: "1 month"]
+  #   unless: [users.id, users.state]
+  # }
 
   #demo/testing how to use sql_always_where - user cannot change - fixed value
   #sql_always_where: ${orders.status} = 'Complete' ;;
+
+  # always_filter: {
+  #   filters: [order_items.created_date: "30 days"]
+  # }
 
   join: users {
     type: left_outer
