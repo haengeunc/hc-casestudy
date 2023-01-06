@@ -1,5 +1,5 @@
-- dashboard: html_demo
-  title: HTML Demo
+- dashboard: html
+  title: HTML_1
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
