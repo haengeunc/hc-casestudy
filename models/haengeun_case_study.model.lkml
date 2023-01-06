@@ -7,7 +7,7 @@ include: "/explore/explore_order_items"
 include: "/explore/explore_products"
 include: "/explore/explore_users"
 include: "/explore/order_items_extend.lkml"
-include: "/dashboards/*"
+include: "/dashboards/customer_behaviour.dashboard"
 
 include: "/queries/queries_for_order_items.lkml" # includes all queries refinements
 
