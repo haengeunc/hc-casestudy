@@ -16,6 +16,9 @@ explore: products {
     user_attribute: allowed_departments
   }
 
+
+
+
  join: distribution_centers {
     type: left_outer
     sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;

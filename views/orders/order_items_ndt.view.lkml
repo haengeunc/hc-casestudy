@@ -14,6 +14,9 @@ view: order_items_ndt {
 
     datagroup_trigger: datagroup_daily_refresh
 
+    cluster_keys: ["user_id"]
+    partition_keys: ["first_order"]
+
   }
 
   dimension: user_id {

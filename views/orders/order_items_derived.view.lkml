@@ -68,7 +68,7 @@ view: order_items_derived {
     sql: ${lifetime_revenue} ;;
   }
 
-  measure: lifetime_total_revenue {
+  measure: lifetime_total_sale_price {
     label: "Total lifetime revenue"
     type: sum
     value_format_name: gbp_0

@@ -191,12 +191,21 @@ view: order_items {
       }
   }
 
+
+
   measure: count_order {
     type: count_distinct
     label: "Count of Orders"
     sql:  ${order_id} ;;
-    drill_fields: [detail*]
     html: <p style="font-size: 15px">{{linked_value}}</p> ;;
+
+      drill_fields: [created_month, total_sale_price, users.age_group]
+      link: {
+        label: "Total sale by month by age group"
+        url: "{{link}}&pivots=users.age_group"
+      }
+
+
   }
 
   measure: count_item_sold{
@@ -207,6 +216,14 @@ view: order_items {
   }
 
 
+  measure: count_item_with_status{
+    label: "Count of Items with status"
+    description: "As part of Looker PDF Cycle testing, remove values that have null status"
+    type: count
+    filters: [order_items.status: "Cancelled, Complete, Returned"]
+  }
+
+
 
   measure: total_sale_price {
     type: sum
@@ -214,21 +231,21 @@ view: order_items {
     sql: ${sale_price} ;;
     description: "Total revenue from all items, including returned"
     drill_fields: [detail*]
-
-    #html: <font color="blue">{{rendered_value}}</font> ;;
+    html: <font color="blue">{{rendered_value}}</font> ;;
   }
 
   #feedback from demo to the team - consider having year-to-date measures to use in the graph
   #consider reviewing map feature to avoid maps being broken
 
-  measure: total_revenue_complete {
+  measure: total_sale_price_complete {
     type: sum
     value_format_name: gbp
     sql: ${sale_price} ;;
     filters: [order_items.status: "Complete, Processing, Shipped"]
 
     description: "Total revenue from items sold"
-    html: <font color="blue">{{rendered_value}}</font> ;;
+   # html: <font color="blue">{{rendered_value}}</font> ;;
+    html: <p>@{currency_value_format_liquid}</p>  ;;
   }
 
   measure: average_sale_price {
@@ -268,6 +285,22 @@ view: order_items {
     value_format_name: gbp
     sql: ${sale_price} - ${products.cost} ;;
 
+  }
+
+  dimension: reporting_period {
+    description: "This Year to date versus Last Year to date"
+    group_label: "Created Date"
+    sql: CASE
+        WHEN date_part('year',${created_raw}) = date_part('year',current_date)
+        AND ${created_raw} < CURRENT_DATE
+        THEN 'This Year to Date'
+
+      WHEN date_part('year',${created_raw}) + 1 = date_part('year',current_date)
+      AND date_part('dayofyear',${created_raw}) <= date_part('dayofyear',current_date)
+      THEN 'Last Year to Date'
+
+      END
+      ;;
   }
 
 
@@ -370,6 +403,47 @@ measure: first_order {
       products.category,
       products.brand
     ]
+  }
+
+
+  parameter: date_granularity_selector {
+    type: unquoted
+    default_value: "created_month"
+
+    allowed_value: {
+      value: "created_month"
+      label: "Month"
+    }
+
+    allowed_value: {
+      value: "created_week"
+      label: "Week"
+    }
+
+    allowed_value: {
+      value: "created_date"
+      label: "Date"
+    }
+  }
+
+  dimension: dynamic_timeframe {
+    label_from_parameter: date_granularity_selector
+    type: string
+    sql:
+        {% if date_granularity_selector._parameter_value == 'created_date' %}
+            ${created_date}
+        {% elsif date_granularity_selector._parameter_value == 'created_week' %}
+            ${created_week}
+        {% else %}
+            ${created_month}
+        {% endif %} ;;
+  }
+
+
+  dimension: welcome_message {
+    type: string
+    html:  Welcome {{_user_attributes['first_name']}} ;;
+    sql: 1 ;;
   }
 
 
