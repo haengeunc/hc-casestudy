@@ -8,6 +8,7 @@ include: "/explore/explore_products"
 include: "/explore/explore_users"
 include: "/explore/order_items_extend.lkml"
 include: "/dashboards/customer_behaviour.dashboard"
+include: "/dashboards/summary.dashboard"
 
 include: "/queries/queries_for_order_items.lkml" # includes all queries refinements
 
