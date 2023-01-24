@@ -1,7 +1,7 @@
 # "thelook_bq" - connection using constant defined in manifest file
 connection: "@{model_connection}"
 
-
+#test
 # include: "/views/**/*.view" ---best practice not to include all views - specify which one
 include: "/explore/explore_order_items"
 include: "/explore/explore_products"

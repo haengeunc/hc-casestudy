@@ -22,9 +22,20 @@ view: users {
 
   dimension: age_group {
     type: tier
-    tiers: [15, 26, 36, 51, 66]
+    tiers: [20, 40, 60, 80]
     style:  integer
     sql: ${age} ;;
+  }
+
+
+  parameter: age_tier_bucket_size {
+    type: number
+  }
+
+  dimension: dynamic_age_tier {
+    type: number
+    sql: TRUNC(${age} / {% parameter age_tier_bucket_size %}, 0)
+      * {% parameter age_tier_bucket_size %} ;;
   }
 
   dimension: city {
@@ -171,7 +182,6 @@ view: users {
     type: count
     filters: [is_new_customer: "Yes"]
   }
-
 
 
 
