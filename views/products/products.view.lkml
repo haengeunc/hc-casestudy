@@ -137,6 +137,16 @@ view: products {
     style:  integer
   }
 
+  parameter: retail_price_bucket_size {
+    type: number
+  }
+
+  dimension: retail_dynamic_price_group {
+    type: number
+    sql: TRUNC(${retail_price} / {% parameter ${retail_price_bucket_size}%},0)
+    * {% parameter ${retail_price_bucket_size}%} ;;
+  }
+
 
   dimension: sku {
     type: string
