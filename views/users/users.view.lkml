@@ -27,9 +27,14 @@ view: users {
     sql: ${age} ;;
   }
 
+
+  parameter: age_tier_bucket_size {
+    type: number
+  }
+
   dimension: dynamic_age_tier {
     type: number
-    sql: TRUNC(${TABLE}.age / {% parameter age_tier_bucket_size %}, 0)
+    sql: TRUNC(${age} / {% parameter age_tier_bucket_size %}, 0)
       * {% parameter age_tier_bucket_size %} ;;
   }
 
@@ -178,13 +183,6 @@ view: users {
     filters: [is_new_customer: "Yes"]
   }
 
-
-#####################################
-#-----parameters------------------------
-
-  parameter: age_tier_bucket_size {
-    type: number
-  }
 
 
 
