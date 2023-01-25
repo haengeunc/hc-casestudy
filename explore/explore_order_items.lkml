@@ -96,10 +96,11 @@ explore: order_items {
     sql_on: ${order_items.user_id} = ${sequence_derived.user_id} ;;
     relationship: many_to_one
   }
+
   join: order_items_pagination {
     type: left_outer
     sql_on: ${order_items_pagination.id} = ${order_items.id} ;;
-    relationship: many_to_one
+    relationship: one_to_one
   }
 
 
