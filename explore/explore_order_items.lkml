@@ -3,6 +3,7 @@ include: "/views/orders/orders.view"
 include: "/views/orders/order_items_ndt.view"
 include: "/views/orders/order_items_derived.view"
 include: "/views/orders/order_sequence_derived.view"
+include: "/views/order_items_pagination.view.lkml"
 
 
 include: "/views/products/products.view"
@@ -93,6 +94,11 @@ explore: order_items {
   join: sequence_derived {
     type: left_outer
     sql_on: ${order_items.user_id} = ${sequence_derived.user_id} ;;
+    relationship: many_to_one
+  }
+  join: order_items_pagination {
+    type: left_outer
+    sql_on: ${order_items_pagination.id} = ${order_items.id} ;;
     relationship: many_to_one
   }
 
