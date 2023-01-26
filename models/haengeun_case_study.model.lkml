@@ -2,7 +2,8 @@
 connection: "@{model_connection}"
 
 #test
-# include: "/views/**/*.view" ---best practice not to include all views - specify which one
+ include: "/views/**/*.view" #best practice not to include all views - specify which one
+include: "/explore/*.lkml"
 include: "/explore/explore_order_items"
 include: "/explore/explore_products"
 include: "/explore/explore_users"
@@ -10,7 +11,12 @@ include: "/explore/order_items_extend.lkml"
 include: "/dashboards/customer_behaviour.dashboard"
 include: "/dashboards/summary.dashboard"
 
+
+
 include: "/queries/queries_for_order_items.lkml" # includes all queries refinements
+
+include: "/views/order_items_pagination.view.lkml"
+
 
 datagroup: datagroup_daily_refresh {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;

@@ -90,20 +90,21 @@ view: inventory_items {
     sql: ${sold_raw} is not null ;;
   }
 
-  dimension: days_in_inventory {
-    label: "Days in Inventory"
-    description: "days between created and sold date"
-    type: number
-    sql: TIMESTAMP_DIFF(coalesce(${sold_raw}, CURRENT_TIMESTAMP()), ${created_raw}, DAY) ;;
-  }
+  # dimension: days_in_inventory {
+  #   label: "Days in Inventory"
+  #   description: "days between created and sold date"
+  #   type: number
+  # #  sql: TIMESTAMP_DIFF(coalesce(${sold_raw}, CURRENT_TIMESTAMP()), ${created_raw}, DAY) ;;
+  #   #sql: TIMESTAMP_DIFF(PARSE_TIMESTAMP("%c", ${sold_raw}), PARSE_TIMESTAMP("%c",${created_raw}), DAY) ;;
+  # }
 
-  dimension: days_in_inventory_tier {
-    label: "Days In Inventory Tier"
-    type: tier
-    sql: ${days_in_inventory} ;;
-    style: integer
-    tiers: [0, 5, 10, 20, 40, 80, 160, 360]
-  }
+  # dimension: days_in_inventory_tier {
+  #   label: "Days In Inventory Tier"
+  #   type: tier
+  #   sql: ${days_in_inventory} ;;
+  #   style: integer
+  #   tiers: [0, 5, 10, 20, 40, 80, 160, 360]
+  # }
 
 
   measure: count {
