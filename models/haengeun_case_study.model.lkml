@@ -3,7 +3,7 @@ connection: "@{model_connection}"
 
 #test
  include: "/views/**/*.view" #best practice not to include all views - specify which one
-
+include: "/explore/*.lkml"
 include: "/explore/explore_order_items"
 include: "/explore/explore_products"
 include: "/explore/explore_users"
