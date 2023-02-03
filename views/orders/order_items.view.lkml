@@ -81,7 +81,6 @@ view: order_items {
     type: number
     # hidden: yes
     sql: ${TABLE}.order_id ;;
-    group_label: "HC"
   }
 
   dimension_group: returned {
@@ -244,7 +243,7 @@ view: order_items {
     filters: [order_items.status: "Complete, Processing, Shipped"]
 
     description: "Total revenue from items sold"
-   # html: <font color="blue">{{rendered_value}}</font> ;;
+  # html: <font color="blue">{{rendered_value}}</font> ;;
     html: <p>@{currency_value_format_liquid}</p>  ;;
   }
 

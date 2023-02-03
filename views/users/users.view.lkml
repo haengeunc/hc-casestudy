@@ -1,3 +1,5 @@
+
+
 view: users {
   sql_table_name: `thelook.users`
     ;;
@@ -144,6 +146,7 @@ view: users {
     dimension: state {
       type: string
       map_layer_name: us_states
+      #map_layer_name: hc_map
       sql: ${TABLE}.state ;;
       group_label: "Location"
     }

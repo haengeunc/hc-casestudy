@@ -52,10 +52,11 @@ explore: +products {
   }
 }
 
-
-
-
-
+map_layer: hc_map {
+  file: "/maps/hc_map.json"
+  format: topojson
+  property_key: ""
+}
 
 
 #best practice not create all explores - be specific in what you are looking for
