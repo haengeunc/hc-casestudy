@@ -17,7 +17,7 @@ include: "/views/users/users.view"
 #------------------------------------------------------
 explore: order_items {
   view_name: order_items
-
+   persist_with: datagroup_daily_refresh
   # sql_always_where: ${order_items.created_date} >= "2019-01-01" ;;
 
   # sql_always_having: ${count_order} > 10 ;;

@@ -1,8 +1,10 @@
 view: order_items {
   sql_table_name: `@{environment}.order_items` ;;
+
   #using constant variable defined in manifest file to refer to scheme - "thelook"
   #hello
   drill_fields: [id]
+
 
   dimension: id {
     primary_key: yes

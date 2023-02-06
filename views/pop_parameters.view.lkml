@@ -47,7 +47,7 @@ view: pop_parameters {
 ## ------------------ HIDDEN HELPER DIMENSIONS  ------------------ ##
 
   dimension: days_in_period {
-    # hidden:  yes
+     hidden:  yes
     view_label: "_PoP"
     description: "Gives the number of days in the current period date range"
     type: number
@@ -55,7 +55,7 @@ view: pop_parameters {
   }
 
   dimension: period_2_start {
-    # hidden:  yes
+     hidden:  yes
     view_label: "_PoP"
     description: "Calculates the start of the previous period"
     type: date
@@ -69,7 +69,7 @@ view: pop_parameters {
   }
 
   dimension: period_2_end {
-    # hidden:  yes
+     hidden:  yes
     view_label: "_PoP"
     description: "Calculates the end of the previous period"
     type: date
@@ -172,65 +172,42 @@ view: pop_parameters {
 
 ## ---------------------- TO CREATE FILTERED MEASURES ---------------------------- ##
 
-  dimension: period_filtered_measures {
-    hidden: yes
-    description: "We just use this for the filtered measures"
-    type: string
-    sql:
-        {% if current_date_range._is_filtered %}
-            CASE
-            WHEN {% condition current_date_range %} ${created_raw} {% endcondition %} THEN 'this'
-            WHEN DATE(${created_date}) between ${period_2_start} and ${period_2_end} THEN 'last' END
-        {% else %} NULL {% endif %} ;;
-  }
+#   dimension: period_filtered_measures {
+#     hidden: yes
+#     description: "We just use this for the filtered measures"
+#     type: string
+#     sql:
+#         {% if current_date_range._is_filtered %}
+#             CASE
+#             WHEN {% condition current_date_range %} ${created_raw} {% endcondition %} THEN 'this'
+#             WHEN DATE(${created_date}) between ${period_2_start} and ${period_2_end} THEN 'last' END
+#         {% else %} NULL {% endif %} ;;
+#   }
 
-# Filtered measures
+# # Filtered measures
 
-  measure: current_period_sales {
-    view_label: "_PoP"
-    type: sum
-    sql: ${sale_price};;
-    filters: [period_filtered_measures: "this"]
-  }
+#   measure: current_period_sales {
+#     view_label: "_PoP"
+#     type: sum
+#     sql: ${sale_price};;
+#     filters: [period_filtered_measures: "this"]
+#   }
 
-  measure: previous_period_sales {
-    view_label: "_PoP"
-    type: sum
-    sql: ${sale_price};;
-    filters: [period_filtered_measures: "last"]
-  }
+#   measure: previous_period_sales {
+#     view_label: "_PoP"
+#     type: sum
+#     sql: ${sale_price};;
+#     filters: [period_filtered_measures: "last"]
+#   }
 
-  measure: sales_pop_change {
-    view_label: "_PoP"
-    label: "Total Sales period-over-period % change"
-    type: number
-    sql: CASE WHEN ${current_period_sales} = 0
-            THEN NULL
-            ELSE (1.0 * ${current_period_sales} / NULLIF(${previous_period_sales} ,0)) - 1 END ;;
-    value_format_name: percent_2
-  }
+#   measure: sales_pop_change {
+#     view_label: "_PoP"
+#     label: "Total Sales period-over-period % change"
+#     type: number
+#     sql: CASE WHEN ${current_period_sales} = 0
+#             THEN NULL
+#             ELSE (1.0 * ${current_period_sales} / NULLIF(${previous_period_sales} ,0)) - 1 END ;;
+#     value_format_name: percent_2
+#   }
 
-}
-
-explore: pop_parameters {
-  label: "PoP Method 3: Custom choice of current and previous periods with parameters"
-
-  fields: [ALL_FIELDS*,
-    -pop_parameters.count_returned_items,
-    -pop_parameters.average_gross_margin,
-    -pop_parameters.gross_margin,
-    -pop_parameters.average_sale_price,
-    -pop_parameters.count_item_with_status,
-    -pop_parameters.count_item_sold,
-    -pop_parameters.count_customer_with_returned_items,
-    -pop_parameters.count_returned_items,
-    -pop_parameters.total_sale_price_complete,
-    -pop_parameters.percent_customer_with_returns,
-    -pop_parameters.percent_item_returned,
-    -pop_parameters.gross_margin_percent,
-    -pop_parameters.total_gross_margin]
-
-  always_filter: {
-    filters: [current_date_range: "6 months", compare_to: "Year" ]
-  }
 }
