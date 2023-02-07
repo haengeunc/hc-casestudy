@@ -165,5 +165,17 @@ view: products {
     value_format_name: gbp
   }
 
+  dimension: navigation_buttons {
+    type: yesno
+    allow_fill: yes
+    sql: true ;;
+    html:
+      <div>
+        <a style="@{navigation_buttons_style}" href="/dashboards-next/2?@{navigation_buttons_filters}">Summary</a>
+        <a style="@{navigation_buttons_style}" href="/dashboards-next/3?@{navigation_buttons_filters}">Brand comparison</a>
+      </div>
+    ;;
+  }
+
 
 }
