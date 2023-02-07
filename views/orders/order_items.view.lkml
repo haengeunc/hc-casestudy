@@ -1,8 +1,10 @@
 view: order_items {
   sql_table_name: `@{environment}.order_items` ;;
+
   #using constant variable defined in manifest file to refer to scheme - "thelook"
   #hello
   drill_fields: [id]
+
 
   dimension: id {
     primary_key: yes
@@ -81,7 +83,6 @@ view: order_items {
     type: number
     # hidden: yes
     sql: ${TABLE}.order_id ;;
-    group_label: "HC"
   }
 
   dimension_group: returned {
@@ -244,7 +245,7 @@ view: order_items {
     filters: [order_items.status: "Complete, Processing, Shipped"]
 
     description: "Total revenue from items sold"
-   # html: <font color="blue">{{rendered_value}}</font> ;;
+  # html: <font color="blue">{{rendered_value}}</font> ;;
     html: <p>@{currency_value_format_liquid}</p>  ;;
   }
 
@@ -445,6 +446,9 @@ measure: first_order {
     html:  Welcome {{_user_attributes['first_name']}} ;;
     sql: 1 ;;
   }
+
+
+
 
 
 

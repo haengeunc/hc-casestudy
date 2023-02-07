@@ -39,6 +39,11 @@ access_grant: level_access {
   allowed_values: ["a"]
 }
 
+access_grant: is_pii_viewer {
+  user_attribute: is_pii_viewer
+  allowed_values: ["Yes"]   }
+
+
 
 
 # refinement to extend the explore to give greater access
@@ -52,10 +57,11 @@ explore: +products {
   }
 }
 
-
-
-
-
+map_layer: hc_map {
+  file: "/maps/hc_map.json"
+  format: topojson
+  property_key: ""
+}
 
 
 #best practice not create all explores - be specific in what you are looking for
