@@ -38,7 +38,7 @@ constant: large_order_threshold {
 }
 
 constant: navigation_buttons_filters {
-  value: "Brand={{ _filters['products.brand'] | url_encode }}&Category={{ _filters['products.category'] | url_encode }}"
+  value: "Category={{ _filters['products.category'] | url_encode }}&Brand={{ _filters['products.brand'] | url_encode }}"
 }
 
 constant: navigation_buttons_style {
