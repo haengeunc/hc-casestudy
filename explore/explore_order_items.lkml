@@ -21,6 +21,8 @@ explore: order_items {
   # sql_always_where: ${products.brand} IN (SELECT brand from ${user_brand_access.SQL_TABLE_NAME}
   #                   WHERE user_id = '{{_user_attributes['email']}}');;
 
+
+
   symmetric_aggregates: yes
   view_name: order_items
    persist_with: datagroup_daily_refresh
