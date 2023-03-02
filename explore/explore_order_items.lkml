@@ -16,6 +16,12 @@ include: "/views/users/users.view"
 #######################################################
 #------------------------------------------------------
 explore: order_items {
+
+  #how to pair with mapping table with Looker user attributes to manage row level security
+  # sql_always_where: ${products.brand} IN (SELECT brand from ${user_brand_access.SQL_TABLE_NAME}
+  #                   WHERE user_id = '{{_user_attributes['email']}}');;
+
+  symmetric_aggregates: yes
   view_name: order_items
    persist_with: datagroup_daily_refresh
   # sql_always_where: ${order_items.created_date} >= "2019-01-01" ;;
@@ -96,6 +102,7 @@ explore: order_items {
     sql_on: ${order_items.user_id} = ${sequence_derived.user_id} ;;
     relationship: many_to_one
   }
+
 
 
 }

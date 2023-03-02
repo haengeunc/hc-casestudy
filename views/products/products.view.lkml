@@ -171,12 +171,50 @@ view: products {
     sql: true ;;
     html:
       <div>
-        <a style="@{navigation_buttons_style}" href="/dashboards-next/1?@{navigation_buttons_filters}">Customer Behaviour</a>
-        <a style="@{navigation_buttons_style}" href="/dashboards-next/2?@{navigation_buttons_filters}">Summary</a>
-        <a style="@{navigation_buttons_style}" href="/dashboards-next/3?@{navigation_buttons_filters}">Brand comparison</a>
+        <a style="@{navigation_buttons_style_3}}" href="/dashboards-next/1?@{navigation_buttons_filters}" target="_blank">Customer Behaviour</a>
+        <a style="@{navigation_buttons_style_2}" href="/dashboards-next/2?@{navigation_buttons_filters}" target="_blank">Summary</a>
+        <a style="@{navigation_buttons_style_2}" href="/dashboards-next/3?@{navigation_buttons_filters}" target="_blank">Brand comparison</a>
       </div>
     ;;
   }
+
+  dimension: navigation_buttons_link {
+    type: yesno
+    allow_fill: yes
+    sql: true ;;
+
+    link: {
+      url:"/dashboards-next/1?@{navigation_buttons_filters}"
+      label: "Customer Behaviour"
+    }
+  }
+
+
+  dimension: navigation_buttons_brand_product {
+    type: yesno
+    allow_fill: yes
+    sql: true ;;
+    html:
+      <div>
+        <a style="display: table; text-align:center; margin: 0 auto; color: #fff; background-color: #4285F4; border-color: #4285F4; float: left; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; user-select: none; padding: 10px; margin: 5px; font-size: 1rem; line-height: 1.5; border-radius: 5px;" href="/dashboards-next/1?Category={{ _filters['products.category'] | url_encode }}&Brand={{ _filters['products.brand'] | url_encode }}">Customer Behaviour</a>
+        <a style="display: table; text-align:center; margin: 0 auto; color: #fff; background-color: #4285F4; border-color: #4285F4; float: left; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; user-select: none; padding: 10px; margin: 5px; font-size: 1rem; line-height: 1.5; border-radius: 5px;" href="/dashboards-next/2?Category={{ _filters['products.category'] | url_encode }}&Brand={{ _filters['products.brand'] | url_encode }}">Summary</a>
+        <a style="display: table; text-align:center; margin: 0 auto; color: #fff; background-color: #4285F4; border-color: #4285F4; float: left; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; user-select: none; padding: 10px; margin: 5px; font-size: 1rem; line-height: 1.5; border-radius: 5px;" href="/dashboards-next/3?Category={{ _filters['products.category'] | url_encode }}&Brand={{ _filters['products.brand'] | url_encode }}">Brand comparison</a>
+      </div>
+    ;;
+  }
+
+  dimension: navigation_buttons_brand_product_link {
+    type: yesno
+    allow_fill: yes
+    sql: true ;;
+    link: {
+      url:"/dashboards-next/1?Category={{ _filters['products.category'] | url_encode }}&Brand={{ _filters['products.brand'] | url_encode }}"
+      label: "navigation"
+    }
+  }
+
+
+
 
 
 }

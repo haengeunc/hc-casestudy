@@ -10,11 +10,11 @@ explore: products {
 
   description: "To analyse data related to products and distribution centers"
 
-  #row level security
-  access_filter: {
-    field: products.department
-    user_attribute: allowed_departments
-  }
+  # #row level security
+  # access_filter: {
+  #   field: products.department
+  #   user_attribute: allowed_departments
+  # }
 
 
 
