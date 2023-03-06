@@ -138,6 +138,18 @@ view: order_items {
   dimension: sale_price {
     type: number
     sql: ${TABLE}.sale_price ;;
+
+  }
+
+  dimension: masked_sale_price {
+    type: number
+
+    #example of row level security driven by user attributes table mapping (refer to user_brand_access.view)
+    sql: CASE WHEN ${products.brand} IN (SELECT brand from ${user_brand_access.SQL_TABLE_NAME}
+                    WHERE user_id = '{{_user_attributes['email']}}') THEN ${TABLE}.sale_price
+          ELSE NULL
+          END;;
+
   }
 
 

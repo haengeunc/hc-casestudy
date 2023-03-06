@@ -8,6 +8,7 @@ explore: pop_parameters {
 
   fields: [ALL_FIELDS*,
     -pop_parameters.count_returned_items,
+    -pop_parameters.masked_sale_price,
     -pop_parameters.average_gross_margin,
     -pop_parameters.gross_margin,
     -pop_parameters.average_sale_price,

@@ -187,6 +187,12 @@ view: users {
   }
 
 
+  measure: average_age {
+    type: average
+    sql: ${age} ;;
+  }
+
+
 
 
   # ----- Sets of fields for drilling ------

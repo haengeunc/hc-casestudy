@@ -42,5 +42,31 @@ constant: navigation_buttons_filters {
 }
 
 constant: navigation_buttons_style {
-  value: "display: table; text-align:center; margin: 0 auto; color: #fff; background-color: #4285F4; border-color: #4285F4; float: left; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; user-select: none; padding: 10px; margin: 5px; font-size: 1rem; line-height: 1.5; border-radius: 5px;"
+  value: "display: table; text-align:center; margin: 0 auto; color: #fff;
+  background-color: #4215F4; border-color: #4215F4;
+  float: left; font-weight: 400; text-align: center; vertical-align: middle;
+  cursor: pointer; user-select: none; padding: 10px; margin: 5px; font-size: 1rem;
+  line-height: 1.5; border-radius: 5px;"
 }
+
+
+constant: navigation_buttons_style_2 {
+  value: "padding: 5px 20px; font-size: 20px; border-bottom: solid 1px #0066FF; float: left; line-height: 40px;"
+}
+
+constant: navigation_buttons_style_3 {
+  value: "padding: 5px 20px; font-size: 20px; border-top: solid 1px #0066FF; border-left: solid 1px #0066FF; border-right: solid 1px #0066FF; border-radius: 5px 5px 0 0; float: left; line-height: 40px; font-weight: bold; background-color: #FFFFFF;"
+}
+
+
+
+
+# "padding: 5px 20px; border-top: solid 1px #0066FF; border-left: solid 1px #0066FF; border-right: solid 1px #0066FF; border-radius: 5px 5px 0 0; float: left; line-height: 40px; font-weight: bold; background-color: #FFFFFF;"" href=""#""> Accesses </a>
+
+# <a style=""padding: 5px 20px; border-bottom: solid 1px #0066FF; float: left; line-height: 40px;"" href=""https://telefonica.cloud.looker.com/dashboards/1618"" > B2C KPIs </a>
+
+# <a style=""padding: 5px 20px; border-bottom: solid 1px #0066FF; float: left; line-height: 40px;"" href=""https://telefonica.cloud.looker.com/dashboards/1619"" > B2B KPIs </a>
+
+# </nav>
+
+# </div>"
