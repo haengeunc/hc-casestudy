@@ -11,7 +11,7 @@ include: "/views/products/distribution_centers.view"
 
 
 include: "/views/users/users.view"
-
+include: "/views/master_date_field.view"
 
 #######################################################
 #------------------------------------------------------
@@ -104,7 +104,5 @@ explore: order_items {
     sql_on: ${order_items.user_id} = ${sequence_derived.user_id} ;;
     relationship: many_to_one
   }
-
-
 
 }
