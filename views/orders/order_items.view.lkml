@@ -247,6 +247,13 @@ view: order_items {
     html: <font color="blue">{{rendered_value}}</font> ;;
   }
 
+  dimension: sale_price_last_year {
+    type: number
+    value_format_name: gbp
+    sql: LAG(${sale_price}) OVER (ORDER BY ${created_year}) AS sale_last_year ;;
+
+  }
+
   #feedback from demo to the team - consider having year-to-date measures to use in the graph
   #consider reviewing map feature to avoid maps being broken
 
