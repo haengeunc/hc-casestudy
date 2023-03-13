@@ -11,8 +11,6 @@ include: "/explore/order_items_extend.lkml"
 include: "/dashboards/customer_behaviour.dashboard"
 include: "/dashboards/summary.dashboard"
 
-
-
 include: "/queries/queries_for_order_items.lkml" # includes all queries refinements
 
 include: "/views/order_items_pagination.view.lkml"
@@ -23,6 +21,12 @@ datagroup: datagroup_daily_refresh {
   sql_trigger:  SELECT count(*) FROM order_items ;;
   description: "triggered when a new order items added to the order items table"
   max_cache_age: "24 hours" #Default value 1 hour cache - not needed as data only refreshes overnight
+}
+
+
+datagroup: daily_datagroup {
+  sql_trigger: SELECT  CURRENT_TIMESTAMP() ;;
+  max_cache_age: "24 hours"
 }
 
 persist_with: datagroup_daily_refresh
