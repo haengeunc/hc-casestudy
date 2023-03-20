@@ -143,6 +143,17 @@ view: users {
       group_label: "Location"
     }
 
+  dimension: user_location {
+    type: location
+    sql_latitude: ${latitude} ;;
+    sql_longitude: ${longitude} ;;
+    link: {
+      label: "Get Directions"
+      url: "https://www.google.com/maps/dir/?api=1&destination={{ value }}"
+      icon_url: "http://www.google.com/s2/favicons?domain=maps.google.com"
+    }
+  }
+
     dimension: state {
       type: string
       map_layer_name: us_states

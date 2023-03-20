@@ -10,6 +10,8 @@ include: "/explore/explore_users"
 include: "/explore/order_items_extend.lkml"
 include: "/dashboards/customer_behaviour.dashboard"
 include: "/dashboards/summary.dashboard"
+# include the refinements
+include: "/refinements/**/*"
 
 include: "/queries/queries_for_order_items.lkml" # includes all queries refinements
 
@@ -25,7 +27,7 @@ datagroup: datagroup_daily_refresh {
 
 
 datagroup: daily_datagroup {
-  sql_trigger: SELECT  CURRENT_TIMESTAMP() ;;
+  sql_trigger: SELECT FORMAT_TIMESTAMP('%F', CURRENT_TIMESTAMP());;
   max_cache_age: "24 hours"
 }
 
