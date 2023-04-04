@@ -169,14 +169,37 @@ view: products {
     type: yesno
     allow_fill: yes
     sql: true ;;
+
+
+    # {% if _explore._dashboard_url contains 'dashboard' %}
     html:
+    {% if _explore._dashboard_url contains '/embed/' %}
+
       <div>
-        <a style="@{navigation_buttons_style_3}}" href="/dashboards-next/1?@{navigation_buttons_filters}" target="_blank">Customer Behaviour</a>
+        <a style="@{navigation_buttons_style_3}}" href="/embed/dashboards-next/1?@{navigation_buttons_filters}" target="_blank">Customer Behaviour - embed </a>
+        <a style="@{navigation_buttons_style_2}" href="/embed/dashboards-next/2?@{navigation_buttons_filters}" target="_blank">Summary</a>
+        <a style="@{navigation_buttons_style_2}" href="/embed/dashboards-next/3?@{navigation_buttons_filters}" target="_blank">Brand comparison</a>
+      </div>
+
+      {% else %}
+
+      <div>
+        <a style="@{navigation_buttons_style_3}}" href="/dashboards-next/1?@{navigation_buttons_filters}" target="_blank">Customer Behaviour - no embed</a>
         <a style="@{navigation_buttons_style_2}" href="/dashboards-next/2?@{navigation_buttons_filters}" target="_blank">Summary</a>
         <a style="@{navigation_buttons_style_2}" href="/dashboards-next/3?@{navigation_buttons_filters}" target="_blank">Brand comparison</a>
       </div>
-    ;;
+
+      {% endif %} ;;
   }
+
+
+  dimension: url_show{
+    type: string
+    html:  check {{ _view._name }} ;;
+    sql: 1;;
+    }
+
+
 
   dimension: navigation_buttons_link {
     type: yesno
