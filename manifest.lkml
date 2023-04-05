@@ -1,4 +1,6 @@
 # release on git as production -16:58 - 25 Jul 2022 - 10:19 - 10.25 - xxx
+
+
 project_name: "haengeun_case_study"
 
 constant: environment {
@@ -70,3 +72,9 @@ constant: navigation_buttons_style_3 {
 # </nav>
 
 # </div>"
+
+
+remote_dependency: bqo {
+  url: "https://github.com/sam-pitcher/bq_optimization_lookml"
+  ref: "master"
+}

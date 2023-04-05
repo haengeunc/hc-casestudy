@@ -1,6 +1,8 @@
 # "thelook_bq" - connection using constant defined in manifest file
 connection: "@{model_connection}"
 
+include: "//bqo/*"
+
 #test
  include: "/views/**/*.view" #best practice not to include all views - specify which one
 include: "/explore/*.lkml"
@@ -16,6 +18,7 @@ include: "/refinements/**/*"
 include: "/queries/queries_for_order_items.lkml" # includes all queries refinements
 
 include: "/views/order_items_pagination.view.lkml"
+
 
 
 datagroup: datagroup_daily_refresh {
