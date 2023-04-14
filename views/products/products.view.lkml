@@ -10,6 +10,7 @@ view: products {
     sql: ${TABLE}.id ;;
   }
 
+
 #----------------------------------------------------------
 #-------Create external links to navigate to explore/google/dashboard
   dimension: brand {
