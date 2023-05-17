@@ -347,6 +347,11 @@ view: order_items {
 
   }
 
+  measure: price_times_count{
+    type:  number
+    sql: ${sale_price} * ${count} ;;
+  }
+
 
 
   measure: gross_margin_percent{
