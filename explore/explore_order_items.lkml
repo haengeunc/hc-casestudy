@@ -16,6 +16,7 @@ include: "/views/master_date_field.view"
 #######################################################
 #------------------------------------------------------
 explore: order_items {
+  fields: [ALL_FIELDS*, -users.created_week]
 
   #how to pair with mapping table with Looker user attributes to manage row level security
   # sql_always_where: ${products.brand} IN (SELECT brand from ${user_brand_access.SQL_TABLE_NAME}
@@ -47,6 +48,7 @@ explore: order_items {
   # }
 
   join: users {
+
     type: left_outer
     sql_on: ${order_items.user_id} = ${users.id} ;;
     relationship: many_to_one
