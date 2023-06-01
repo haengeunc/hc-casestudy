@@ -426,6 +426,7 @@ measure: first_order {
   }
 
 
+
   parameter: date_granularity_selector {
     type: unquoted
     default_value: "created_month"
