@@ -11,6 +11,7 @@ include: "/views/products/distribution_centers.view"
 
 
 include: "/views/users/users.view"
+include: "/views/users/events.view"
 include: "/views/master_date_field.view"
 
 #######################################################
@@ -95,11 +96,11 @@ explore: order_items {
 
   #consider if joining order items and events makes sense.... though dashboard can have cross filtering only if from the same explore
 
-  # join: events {
-  #   type: left_outer
-  #   sql_on: ${events.user_id} = ${order_items.user_id} ;;
-  #   relationship: many_to_many
-  # }
+  join: events {
+    type: left_outer
+    sql_on: ${events.user_id} = ${order_items.user_id} ;;
+    relationship: many_to_many
+  }
 
   join: sequence_derived {
     type: left_outer

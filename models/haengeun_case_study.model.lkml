@@ -1,3 +1,4 @@
+#haengeun_case_study
 # "thelook_bq" - connection using constant defined in manifest file
 connection: "@{model_connection}"
 
