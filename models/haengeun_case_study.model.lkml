@@ -2,7 +2,7 @@
 # "thelook_bq" - connection using constant defined in manifest file
 connection: "@{model_connection}"
 
-include: "//bqo/*"
+# include: "//bqo/*"
 
 #test
  include: "/views/**/*.view" #best practice not to include all views - specify which one

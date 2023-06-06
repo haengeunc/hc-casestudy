@@ -11,7 +11,6 @@ constant: environment {
 #using constant variable allows multi staging in a single instance
 constant: model_connection {
   value: "thelook_bq"
-
 }
 
 #formatting shorten 0's using constant
@@ -73,8 +72,8 @@ constant: navigation_buttons_style_3 {
 
 # </div>"
 
-
-remote_dependency: bqo {
-  url: "https://github.com/sam-pitcher/bq_optimization_lookml"
-  ref: "master"
-}
+#remote dependencies - bqo
+# remote_dependency: bqo {
+#   url: "https://github.com/sam-pitcher/bq_optimization_lookml"
+#   ref: "master"
+# }
