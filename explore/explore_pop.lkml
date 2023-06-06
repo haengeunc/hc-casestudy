@@ -1,4 +1,4 @@
-include: "/views/pop_parameters.view.lkml"
+include: "/views/z_misc/pop_parameters.view.lkml"
 
 
 #https://github.com/llooker/period_over_period_analysis/blob/master/bigquery/views/method_3.view.lkml
