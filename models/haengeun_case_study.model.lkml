@@ -18,7 +18,7 @@ include: "/refinements/**/*"
 
 include: "/queries/queries_for_order_items.lkml" # includes all queries refinements
 
-include: "/views/order_items_pagination.view.lkml"
+include: "/views/z_misc/order_items_pagination.view.lkml"
 
 
 

@@ -12,7 +12,7 @@ include: "/views/products/distribution_centers.view"
 
 include: "/views/users/users.view"
 include: "/views/users/events.view"
-include: "/views/master_date_field.view"
+include: "/views/z_misc/master_date_field.view"
 
 #######################################################
 #------------------------------------------------------

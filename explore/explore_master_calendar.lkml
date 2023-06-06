@@ -3,7 +3,7 @@ include: "/views/orders/order_items.view"
 
 include: "/views/users/users.view"
 include: "/views/products/products.view"
-include: "/views/master_date_field.view"
+include: "/views/z_misc/master_date_field.view"
 
 #######################################################
 #------------------------------------------------------

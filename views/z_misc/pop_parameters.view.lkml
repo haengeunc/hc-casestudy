@@ -1,4 +1,4 @@
-include: "/views/orders/order_items.view.lkml"
+ include: "/views/orders/order_items.view.lkml"
 
 view: pop_parameters {
   extends: [order_items]
