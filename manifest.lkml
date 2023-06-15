@@ -78,3 +78,7 @@ remote_dependency: bqo {
   url: "https://github.com/sam-pitcher/bq_optimization_lookml"
   ref: "master"
 }
+
+constant: filter_pii {
+  value: "IF(_user_attributes['group'] == '3', null, _user_attributes['email'])"
+}

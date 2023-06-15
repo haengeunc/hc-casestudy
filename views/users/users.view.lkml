@@ -6,6 +6,7 @@ view: users {
   drill_fields: [id]
 
 
+
 #####################################
 #-----DIMENSIONS---------------------
 
@@ -95,6 +96,7 @@ view: users {
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
+
   }
 
   dimension: first_name {

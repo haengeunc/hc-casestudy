@@ -12,6 +12,9 @@ include: "/explore/explore_users"
 include: "/explore/order_items_extend.lkml"
 include: "/dashboards/customer_behaviour.dashboard"
 include: "/dashboards/summary.dashboard"
+include: "/explore/explore_pii.lkml"
+
+
 # include the refinements
 include: "/refinements/**/*"
 
