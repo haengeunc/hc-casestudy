@@ -4,6 +4,8 @@
 # explore: csv_to_sql_query {}
 #https://csv-sql.web.app/
 
+explore: students {}
+
 view: students {
   derived_table: {
     sql:
@@ -115,6 +117,14 @@ view: students {
     sql: ${TABLE}.student_id ;;
     primary_key: yes
   }
+
+  dimension: row_level_security {
+    type: yesno
+    description: "Apply row level security if email matches or part of all data group"
+    sql: {{_user_attributes['can_see_all_data']}}
+      OR ${email} = "{{_user_attributes['email']}}" ;;
+  }
+
 
   measure: count {
     type: count
