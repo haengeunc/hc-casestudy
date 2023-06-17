@@ -12,6 +12,8 @@ explore: explore_pii {
   view_name: "users"
 
 
+  # view_name: "students"
+  # join: users {
 
     join: students {
       type: left_outer
@@ -20,7 +22,7 @@ explore: explore_pii {
     }
 
 
-sql_always_where: ${users.row_level_security}
+sql_always_where: ${students.row_level_security}
 
 ;;
 
