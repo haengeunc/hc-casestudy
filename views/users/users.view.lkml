@@ -172,6 +172,15 @@ view: users {
    #####################################
 
 
+  dimension: row_level_security {
+    type: yesno
+    description: "Apply row level security if email matches or part of all data group"
+    sql: {{_user_attributes['can_see_all_data']}}
+    OR ${email} = "{{_user_attributes['email']}}" ;;
+  }
+
+
+
 #####################################
 #-----MEASURES------------------------
 

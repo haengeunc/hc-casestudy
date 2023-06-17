@@ -4,6 +4,8 @@
 # explore: csv_to_sql_query {}
 #https://csv-sql.web.app/
 
+explore: students {}
+
 view: students {
   derived_table: {
     sql:
@@ -17,10 +19,10 @@ view: students {
         'Anna' AS student_name, 'haengeun@google.com'  AS email, 72240 AS student_id
       UNION ALL
       SELECT
-        'Becky' AS student_name, 'Becky@test.com' AS email, 72239 AS student_id
+        'Becky' AS student_name, 'haengeun+test@google.com' AS email, 72239 AS student_id
       UNION ALL
       SELECT
-        'Benjamin' AS student_name, 'Benjamin@test.com' AS email, 72238 AS student_id
+        'Benjamin' AS student_name, 'haengeun+test@google.com' AS email, 72238 AS student_id
       UNION ALL
       SELECT
         'Carl' AS student_name, 'Carl@test.com' AS email, 72237 AS student_id
@@ -115,6 +117,14 @@ view: students {
     sql: ${TABLE}.student_id ;;
     primary_key: yes
   }
+
+  dimension: row_level_security {
+    type: yesno
+    description: "Apply row level security if email matches or part of all data group"
+    sql: {{_user_attributes['can_see_all_data']}}
+      OR ${email} = "{{_user_attributes['email']}}" ;;
+  }
+
 
   measure: count {
     type: count
