@@ -20,12 +20,16 @@ explore: explore_pii {
     }
 
 
-sql_always_where: ${students.email} in ("{{_user_attributes['email']}}");;
+sql_always_where: ${users.row_level_security}
 
-  access_filter: {
-    field: users.country
-    user_attribute: country
-  }
+;;
+
+# ${students.email} in ("{{_user_attributes['email']}}");;
+
+#   access_filter: {
+#     field: users.country
+#     user_attribute: country
+#   }
 
 
 
