@@ -11,6 +11,8 @@ include: "/explore/explore_order_items"
 include: "/explore/explore_products"
 include: "/explore/explore_users"
 include: "/explore/order_items_extend.lkml"
+
+include: "/dashboards/*.dashboard"
 include: "/dashboards/customer_behaviour.dashboard"
 include: "/dashboards/summary.dashboard"
 # include the refinements
