@@ -334,6 +334,8 @@ view: order_items {
     filters: [order_items.status: "Complete, Processing, Shipped"]
     drill_fields: [product_detail*]
     description: "Total gross margin from items sold"
+    html: {{ rendered_value }} | {{gross_margin_percent._rendered_value }} of total ;;
+    #Edit tooltop: https://cloud.google.com/looker/docs/best-practices/cookbook-visualizations-tooltip-customization#example
   }
 
 #Average Gross Margin
