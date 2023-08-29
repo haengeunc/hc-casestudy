@@ -1,4 +1,7 @@
 # "thelook_bq" - connection using constant defined in manifest file
+
+#test
+
 connection: "@{model_connection}"
 
 
