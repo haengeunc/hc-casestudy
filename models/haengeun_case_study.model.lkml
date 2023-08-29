@@ -11,6 +11,9 @@ include: "/explore/explore_order_items"
 include: "/explore/explore_products"
 include: "/explore/explore_users"
 include: "/explore/order_items_extend.lkml"
+include: "/explore/explore_order_items_top_rank.lkml"
+
+
 
 include: "/dashboards/*.dashboard"
 include: "/dashboards/customer_behaviour.dashboard"
