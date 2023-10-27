@@ -17,6 +17,7 @@ view: button_test {
     sql: ${TABLE}.text ;;
   }
 
+###### modal button ####
 
   measure: info_icon {
     type: sum
@@ -33,6 +34,7 @@ view: button_test {
     measure: user_guide_text {
       label: "how to use this dashboard"
       type: string
+      hidden: yes
       sql: DISTINCT '';;
       html:
      <div style="
