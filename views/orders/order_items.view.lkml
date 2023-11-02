@@ -1,3 +1,4 @@
+#check
 view: order_items {
   sql_table_name: `@{environment}.order_items` ;;
 
