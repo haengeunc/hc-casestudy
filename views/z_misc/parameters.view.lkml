@@ -1,5 +1,14 @@
+explore: parameters {}
+
 
 view: parameters {
+  derived_table: {
+    sql:
+      SELECT
+        '1' AS id
+      ;;
+
+  }
 
   parameter: reporting_timezone {
 
@@ -23,9 +32,34 @@ view: parameters {
 
   }
 
-  parameter: reporting_currency {
 
-    default_value: "USD"
+dimension: user_attribute_partner_name {
+  type: string
+  # sql: {{_user_attributes['partner_name']}} ;;
+  sql: {% if _user_attributes['partner_name'] == 'brand' %} 'USD'
+        {% elsif _user_attributes['partner_name'] == 'multitenant' %} 'GBP'
+        {% else %} 'EUR'
+        {% endif %} ;;
+
+}
+
+dimension: currency_liquid_constant {
+  sql: @{currency_liquid} ;;
+
+}
+
+  parameter: reporting_currency {
+    type: unquoted
+
+    # default_value: "{% if _user_attributes['partner_name'] == 'brand' %} 'USD'
+    #     {% elsif _user_attributes['partner_name'] == 'multitenant' %} 'GBP'
+    #     {% else %} 'EUR'
+    #     {% endif %}"
+
+    # default_value: "${user_attribute_partner_name}"
+
+    default_value: "@{currency_liquid}"
+
 
     allowed_value: {
       value: "USD"
@@ -33,11 +67,15 @@ view: parameters {
     allowed_value: {
       value: "GBP"
     }
+
     allowed_value: {
       value: "EUR"
     }
 
   }
+
+
+
 
   parameter: taxes_type {
 

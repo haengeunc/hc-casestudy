@@ -59,6 +59,13 @@ constant: navigation_buttons_style_3 {
   value: "padding: 5px 20px; font-size: 20px; border-top: solid 1px #0066FF; border-left: solid 1px #0066FF; border-right: solid 1px #0066FF; border-radius: 5px 5px 0 0; float: left; line-height: 40px; font-weight: bold; background-color: #FFFFFF;"
 }
 
+constant: currency_liquid {
+  value: "{% if _user_attributes['partner_name'] == 'brand' %} 'USD'
+            {% elsif _user_attributes['partner_name'] == 'multitenant' %} 'GBP'
+            {% else %} 'EUR'
+            {% endif %}"
+}
+
 
 
 
