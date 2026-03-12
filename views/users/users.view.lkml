@@ -1,3 +1,5 @@
+
+
 view: users {
   sql_table_name: `thelook.users`
     ;;
@@ -22,9 +24,20 @@ view: users {
 
   dimension: age_group {
     type: tier
-    tiers: [15, 26, 36, 51, 66]
+    tiers: [20, 40, 60, 80]
     style:  integer
     sql: ${age} ;;
+  }
+
+
+  parameter: age_tier_bucket_size {
+    type: number
+  }
+
+  dimension: dynamic_age_tier {
+    type: number
+    sql: TRUNC(${age} / {% parameter age_tier_bucket_size %}, 0)
+      * {% parameter age_tier_bucket_size %} ;;
   }
 
   dimension: city {
@@ -130,9 +143,21 @@ view: users {
       group_label: "Location"
     }
 
+  dimension: user_location {
+    type: location
+    sql_latitude: ${latitude} ;;
+    sql_longitude: ${longitude} ;;
+    link: {
+      label: "Get Directions"
+      url: "https://www.google.com/maps/dir/?api=1&destination={{ value }}"
+      icon_url: "http://www.google.com/s2/favicons?domain=maps.google.com"
+    }
+  }
+
     dimension: state {
       type: string
       map_layer_name: us_states
+      #map_layer_name: hc_map
       sql: ${TABLE}.state ;;
       group_label: "Location"
     }
@@ -145,6 +170,15 @@ view: users {
     }
 
    #####################################
+
+
+  dimension: row_level_security {
+    type: yesno
+    description: "Apply row level security if email matches or part of all data group"
+    sql: {{_user_attributes['can_see_all_data']}}
+    OR ${email} = "{{_user_attributes['email']}}" ;;
+  }
+
 
 
 #####################################
@@ -172,6 +206,18 @@ view: users {
     filters: [is_new_customer: "Yes"]
   }
 
+
+#example of creating button and image
+  measure: average_age {
+    type: average
+    sql: ${age} ;;
+    value_format_name: decimal_1
+    html:{{rendered_value}}
+    <p style="height: 50px"><a style="font-size:10px; padding: 3px 4px 3px 2px; letter-spacing: 0px; border: 1px solid #0042e4;text-align:center;color: #0042e4; background-color: white; " href="https://google.com" target="_blank" rel="noopener noreferrer">
+    <img src="https://b-new.be/wp-content/uploads/2020/07/LK.png" height=10 width=14> button </a></p>
+    ;;
+
+  }
 
 
 

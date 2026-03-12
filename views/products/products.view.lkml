@@ -10,6 +10,7 @@ view: products {
     sql: ${TABLE}.id ;;
   }
 
+
 #----------------------------------------------------------
 #-------Create external links to navigate to explore/google/dashboard
   dimension: brand {
@@ -50,6 +51,38 @@ view: products {
     suggest_explore: explore_order_items
     suggest_dimension: brand
   }
+
+  dimension: brand_display {
+    view_label: "Item"
+    type: string
+    sql: ${brand} ;;
+    html: {% if brand._value == "Gap" %} <img src="https://i.ibb.co/t8BH0H9/6596980-preview.png" width="135px" height="auto">
+          {% elsif brand._value == 'Calvin Klein' %} <img src="https://i.ibb.co/P6b0MtJ/webb-banks-brand-titos-handmade-vodka2a.png"  width="135px" height="auto">
+          {% elsif brand._value == 'Coach' %} <img src="https://i.ibb.co/W6HF88z/download.png" width="135px" height="auto">
+          {% elsif brand._value == '180s' %} <img src="https://i.ibb.co/tLWGc8n/looker-logo.png"  width="135px" height="auto">
+          {% elsif brand._value == 'Hawkeye' %} <img src="https://i.ibb.co/R6Gt3YG/10932-1.png" width="135px" height="auto">
+          {% elsif brand._value == 'Hennessy' %} <img src="https://i.ibb.co/bQQtJvQ/hennessy-logo-black-and-white.png" width="135px" height="auto">
+          {% elsif brand._value == 'Jack Daniels' %} <img src="https://i.ibb.co/z7BXsxZ/jack-daniels-logo-png-1.png"  width="135px" height="auto">
+          {% elsif brand._value == 'Smirnoff' %} <img src="https://i.ibb.co/hc6VwKx/6779046-preview.png"  width="135px" height="auto">
+          {% else %} {{value}}
+          {% endif %} ;;
+  }
+
+  # dimension: brand_display {
+  #   view_label: "Item"
+  #   type: string
+  #   sql: ${brand} ;;
+  #   html: {% if brand._value == "Captain Morgan" %} <img src="https://i.ibb.co/t8BH0H9/6596980-preview.png" width="135px" height="auto">
+  #         {% elsif brand._value == 'Titos' %} <img src="https://i.ibb.co/P6b0MtJ/webb-banks-brand-titos-handmade-vodka2a.png"  width="135px" height="auto">
+  #         {% elsif brand._value == 'Crown Royal' %} <img src="https://i.ibb.co/dtBpYsT/crown-royal-logo.png" width="135px" height="auto">
+  #         {% elsif brand._value == 'Fireball' %} <img src="https://i.ibb.co/sH8RxtT/6759031-preview.jpg"  width="135px" height="auto">
+  #         {% elsif brand._value == 'Hawkeye' %} <img src="https://i.ibb.co/R6Gt3YG/10932-1.png" width="135px" height="auto">
+  #         {% elsif brand._value == 'Hennessy' %} <img src="https://i.ibb.co/bQQtJvQ/hennessy-logo-black-and-white.png" width="135px" height="auto">
+  #         {% elsif brand._value == 'Jack Daniels' %} <img src="https://i.ibb.co/z7BXsxZ/jack-daniels-logo-png-1.png"  width="135px" height="auto">
+  #         {% elsif brand._value == 'Smirnoff' %} <img src="https://i.ibb.co/hc6VwKx/6779046-preview.png"  width="135px" height="auto">
+  #         {% else %} {{value}}
+  #         {% endif %} ;;
+  # }
 
 #----------------------------------------------------------
 #create a dynamic measure using a liquid parameter
@@ -137,6 +170,16 @@ view: products {
     style:  integer
   }
 
+  parameter: retail_price_bucket_size {
+    type: number
+  }
+
+  dimension: retail_dynamic_price_group {
+    type: number
+    sql: TRUNC(${retail_price} / {% parameter ${retail_price_bucket_size}%},0)
+    * {% parameter ${retail_price_bucket_size}%} ;;
+  }
+
 
   dimension: sku {
     type: string
@@ -154,6 +197,80 @@ view: products {
     sql: ${retail_price} - ${cost} ;;
     value_format_name: gbp
   }
+
+  dimension: navigation_buttons {
+    type: yesno
+    allow_fill: yes
+    sql: true ;;
+
+
+    # {% if _explore._dashboard_url contains 'dashboard' %}
+    html:
+    {% if _explore._dashboard_url contains '/embed/' %}
+
+      <div>
+        <a style="@{navigation_buttons_style_3}}" href="/embed/dashboards-next/1?@{navigation_buttons_filters}" target="_blank">Customer Behaviour - embed </a>
+        <a style="@{navigation_buttons_style_2}" href="/embed/dashboards-next/2?@{navigation_buttons_filters}" target="_blank">Summary</a>
+        <a style="@{navigation_buttons_style_2}" href="/embed/dashboards-next/3?@{navigation_buttons_filters}" target="_blank">Brand comparison</a>
+      </div>
+
+      {% else %}
+
+      <div>
+        <a style="@{navigation_buttons_style_3}}" href="/dashboards-next/1?@{navigation_buttons_filters}" target="_blank">Customer Behaviour - no embed</a>
+        <a style="@{navigation_buttons_style_2}" href="/dashboards-next/2?@{navigation_buttons_filters}" target="_blank">Summary</a>
+        <a style="@{navigation_buttons_style_2}" href="/dashboards-next/3?@{navigation_buttons_filters}" target="_blank">Brand comparison</a>
+      </div>
+
+      {% endif %} ;;
+  }
+
+
+  dimension: url_show{
+    type: string
+    html:  check {{ _view._name }} ;;
+    sql: 1;;
+    }
+
+
+
+  dimension: navigation_buttons_link {
+    type: yesno
+    allow_fill: yes
+    sql: true ;;
+
+    link: {
+      url:"/dashboards-next/1?@{navigation_buttons_filters}"
+      label: "Customer Behaviour"
+    }
+  }
+
+
+  dimension: navigation_buttons_brand_product {
+    type: yesno
+    allow_fill: yes
+    sql: true ;;
+    html:
+      <div>
+        <a style="display: table; text-align:center; margin: 0 auto; color: #fff; background-color: #4285F4; border-color: #4285F4; float: left; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; user-select: none; padding: 10px; margin: 5px; font-size: 1rem; line-height: 1.5; border-radius: 5px;" href="/dashboards-next/1?Category={{ _filters['products.category'] | url_encode }}&Brand={{ _filters['products.brand'] | url_encode }}">Customer Behaviour</a>
+        <a style="display: table; text-align:center; margin: 0 auto; color: #fff; background-color: #4285F4; border-color: #4285F4; float: left; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; user-select: none; padding: 10px; margin: 5px; font-size: 1rem; line-height: 1.5; border-radius: 5px;" href="/dashboards-next/2?Category={{ _filters['products.category'] | url_encode }}&Brand={{ _filters['products.brand'] | url_encode }}">Summary</a>
+        <a style="display: table; text-align:center; margin: 0 auto; color: #fff; background-color: #4285F4; border-color: #4285F4; float: left; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; user-select: none; padding: 10px; margin: 5px; font-size: 1rem; line-height: 1.5; border-radius: 5px;" href="/dashboards-next/3?Category={{ _filters['products.category'] | url_encode }}&Brand={{ _filters['products.brand'] | url_encode }}">Brand comparison</a>
+      </div>
+    ;;
+  }
+
+  dimension: navigation_buttons_brand_product_link {
+    type: yesno
+    allow_fill: yes
+    sql: true ;;
+    link: {
+      url:"/dashboards-next/1?Category={{ _filters['products.category'] | url_encode }}&Brand={{ _filters['products.brand'] | url_encode }}"
+      label: "navigation"
+    }
+  }
+
+
+
 
 
 }

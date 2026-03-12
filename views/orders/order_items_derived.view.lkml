@@ -68,7 +68,7 @@ view: order_items_derived {
     sql: ${lifetime_revenue} ;;
   }
 
-  measure: lifetime_total_revenue {
+  measure: lifetime_total_sale_price {
     label: "Total lifetime revenue"
     type: sum
     value_format_name: gbp_0
@@ -121,6 +121,32 @@ view: order_items_derived {
     type: number
     sql: date_diff(current_date, ${latest_order}, day) ;;
   }
+
+
+
+
+  # dimension: business_days_since_lastest_order {
+
+  #   type: number
+  #   sql: DATE_DIFF(current_date,${latest_order}, day) -
+
+  #   ((FLOOR(DATE_DIFF(current_date,${latest_order}, day)/7)*2)
+  #     +
+  #       CASE WHEN
+  #         EXTRACT(DAYOFWEEK FROM DATE ${latest_order}) -
+  #         EXTRACT(DAYOFWEEK FROM DATE ${latest_order})  IN (1,2,3,4,5) AND EXTRACT(DAYOFWEEK FROM DATE ${latest_order}) !=0
+  #       THEN 1 ELSE 0 END
+  #     +
+  #       CASE WHEN
+  #       EXTRACT(DAYOFWEEK FROM DATE ${latest_order}) != 0 AND EXTRACT(DAYOFWEEK FROM DATE ${latest_order}) = 0
+  #       THEN 1 ELSE 0 END
+  #     +
+  #       CASE WHEN EXTRACT(DAYOFWEEK FROM DATE ${latest_order}) = 0 AND EXTRACT(DAYOFWEEK FROM DATE ${latest_order}) != 0
+  #       THEN 2 ELSE 0 END
+  #     );;
+
+  # }
+
 
 
   measure: average_days_since_latest_order {

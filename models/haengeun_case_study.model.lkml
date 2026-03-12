@@ -1,17 +1,43 @@
+#haengeun_case_study
 # "thelook_bq" - connection using constant defined in manifest file
 connection: "@{model_connection}"
 
+# include: "//bqo/*"
 
-# include: "/views/**/*.view" ---best practice not to include all views - specify which one
+#test
+ include: "/views/**/*.view" #best practice not to include all views - specify which one
+include: "/explore/*.lkml"
 include: "/explore/explore_order_items"
 include: "/explore/explore_products"
 include: "/explore/explore_users"
+include: "/explore/order_items_extend.lkml"
+include: "/explore/explore_order_items_top_rank.lkml"
+
+
+
+include: "/dashboards/*.dashboard"
+include: "/dashboards/customer_behaviour.dashboard"
+include: "/dashboards/summary.dashboard"
+# include the refinements
+include: "/refinements/**/*"
+
+include: "/queries/queries_for_order_items.lkml" # includes all queries refinements
+
+include: "/views/z_misc/*.view.lkml"
+
+
 
 datagroup: datagroup_daily_refresh {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
   sql_trigger:  SELECT count(*) FROM order_items ;;
   description: "triggered when a new order items added to the order items table"
   max_cache_age: "24 hours" #Default value 1 hour cache - not needed as data only refreshes overnight
+}
+
+
+datagroup: daily_datagroup {
+  sql_trigger: SELECT FORMAT_TIMESTAMP('%F', CURRENT_TIMESTAMP());;
+  max_cache_age: "24 hours"
 }
 
 persist_with: datagroup_daily_refresh
@@ -28,6 +54,11 @@ access_grant: level_access {
   allowed_values: ["a"]
 }
 
+access_grant: is_pii_viewer {
+  user_attribute: is_pii_viewer
+  allowed_values: ["Yes"]   }
+
+
 
 
 # refinement to extend the explore to give greater access
@@ -41,10 +72,11 @@ explore: +products {
   }
 }
 
-
-
-
-
+map_layer: hc_map {
+  file: "/maps/hc_map.json"
+  format: topojson
+  property_key: ""
+}
 
 
 #best practice not create all explores - be specific in what you are looking for

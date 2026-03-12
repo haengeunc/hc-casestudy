@@ -58,14 +58,14 @@
     model: haengeun_case_study
     explore: order_items
     type: looker_column
-    fields: [users.age_group, order_items.total_revenue_complete, users.gender]
+    fields: [users.age_group, order_items.total_sale_price_complete, users.gender]
     pivots: [users.gender]
     fill_fields: [users.age_group]
     sorts: [users.age_group, users.gender]
     limit: 500
     dynamic_fields: [{category: table_calculation, label: New Calculation, value_format: !!null '',
         value_format_name: percent_0, calculation_type: percent_of_column_sum, table_calculation: new_calculation,
-        args: [order_items.total_revenue_complete], _kind_hint: measure, _type_hint: number}]
+        args: [order_items.total_sale_price_complete], _kind_hint: measure, _type_hint: number}]
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_view_names: false
@@ -268,7 +268,7 @@
     show_silhouette: false
     totals_color: "#808080"
     y_axes: [{label: Daily Revenue, orientation: left, series: [{axisId: order_items.total_sale_price,
-            id: No - order_items.total_sale_price, name: 'No'}, {axisId: order_items.total_sale_price,
+            id: No - order_items.total_revenue, name: 'No'}, {axisId: order_items.total_revenue,
             id: Yes - order_items.total_sale_price, name: 'Yes'}], showLabels: true,
         showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
         type: linear}]
@@ -538,7 +538,7 @@
     dynamic_fields: [{category: table_calculation, expression: "(${order_items.total_sale_price}\
           \ / sum(${order_items.total_sale_price}))", label: "% of Total Revenue",
         value_format: !!null '', value_format_name: percent_2, _kind_hint: measure,
-        table_calculation: of_total_revenue, _type_hint: number}]
+        table_calculation: of_total_sale_price, _type_hint: number}]
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -588,13 +588,13 @@
     show_row_totals: true
     truncate_header: false
     series_column_widths:
-      of_total_revenue: 260
+      of_total_sale_price: 260
     series_cell_visualizations:
       order_items.gross_margin_percent:
         is_active: false
       order_items.total_sale_price:
         is_active: true
-      of_total_revenue:
+      of_total_sale_price:
         is_active: false
     listen:
       Created Year: order_items.created_year
@@ -700,7 +700,7 @@
     dynamic_fields: [{category: table_calculation, expression: "(${order_items.total_sale_price}\
           \ / sum(${order_items.total_sale_price}))", label: "% of Total Revenue",
         value_format: !!null '', value_format_name: percent_2, _kind_hint: measure,
-        table_calculation: of_total_revenue, _type_hint: number}]
+        table_calculation: of_total_sale_price, _type_hint: number}]
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -750,13 +750,13 @@
     show_row_totals: true
     truncate_header: false
     series_column_widths:
-      of_total_revenue: 260
+      of_total_sale_price: 260
     series_cell_visualizations:
       order_items.gross_margin_percent:
         is_active: false
       order_items.total_sale_price:
         is_active: true
-      of_total_revenue:
+      of_total_sale_price:
         is_active: false
     listen:
       Created Year: order_items.created_year

@@ -1,20 +1,24 @@
-explore: order_items_ndt {}
+explore: order_items_ndt_cluster_partition {}
 
 # If necessary, uncomment the line below to include explore_source.
 # include: "explore_order_items.lkml"
 
-view: order_items_ndt {
+view: order_items_ndt_cluster_partition {
   derived_table: {
     explore_source: order_items {
       bind_all_filters: no
-      column: user_id {}
-      column: total_sale_price {}
-      column: count {}
-      column: first_order {}
-      column: latest_order {}
+        column: user_id {}
+        column: total_sale_price {}
+        column: count {}
+        column: first_order {}
+        column: latest_order {}
     }
 
-     datagroup_trigger: datagroup_daily_refresh
+    datagroup_trigger: datagroup_daily_refresh
+
+    cluster_keys: ["user_id"]
+    partition_keys: ["first_order"]
+
   }
 
   dimension: user_id {
