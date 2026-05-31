@@ -109,4 +109,36 @@ explore: order_items {
     relationship: many_to_one
   }
 
+
+  ##########
+
+  # sql_always_where:
+  # -- Country level RLS
+  # {% assign ua_values = _user_attributes['country'] | split: "," %}
+
+  # {% for ua_value in ua_values -%}
+
+  # (1 = 0
+  # or
+  # '{{ ua_value }}' = '%'
+  # or
+  # --{% assign user_group = _user_attributes['country'] | remove: '%' %}
+  # (
+  # '{{ ua_value }}' <> '%'
+  # )
+  # )
+
+  # {%- if forloop.length > 0 -%}
+  # {% unless forloop.last %} or {% endunless -%}
+  # {%- endif -%}
+
+  # {% else %}
+
+  # No User Attribute.
+
+  # {% endfor %}
+
+  # ;;
+
+
 }
