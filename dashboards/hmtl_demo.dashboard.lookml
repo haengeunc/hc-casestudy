@@ -3,12 +3,11 @@
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
-  preferred_slug: E4Tmd5JHHHvCWYlh5gjTWd
+  preferred_slug: 9cqdmc8ymP7yfygMTxE4sF
   elements:
   - name: ''
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: "<div style=\"border: solid 1px #4285F4; border-radius: 5px; padding:\
       \ 5px 10px; background: #eaf1fe; height: 200px; text-align: center; margin-bottom:\
       \ 10px;\">\n\n\t<div>\n\n\t\t<img style=\"height: 60px; margin-top: 30px;\"\
@@ -42,7 +41,6 @@
   - name: " (2)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: "<div style=\"text-align: center; min-height: 60px; padding: 25px;\"\
       >\n\n<a style=\"\n\n\tcolor: #fff;\n\n    background-color: #4285F4;\n\n   \
       \ border-color: #4285F4;\n\n    font-weight: 400;\n\n    text-align: center;\n\
@@ -57,7 +55,6 @@
   - name: " (3)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: "<div style=\"text-align: center; display: inline-block;\">\n\n<a style=\"\
       \n\n\tcolor: #4285F4;\n\n    border: solid 1px #4285F4;\n\n    float: left;\n\
       \n    font-weight: 400;\n\n    text-align: center;\n\n    vertical-align: middle;\n\
@@ -86,7 +83,6 @@
   - name: " (4)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: |
       <nav style="font-size: 18px; padding: 5px 10px 0 10px; height: 60px">
 
@@ -108,7 +104,6 @@
   - name: " (5)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: "<div style='background-color: #fff; padding: 5px 10px; border: solid\
       \ 1px #ededed; border-radius: 5px;'>\n\n<h2 style='margin-bottom: 15px; font-weight:\
       \ bold;'>Easy SVG Icons</h2>\n\n\n\n<p>Get your SVG icons <a href='http://svgicons.sparkk.fr/'\
@@ -143,7 +138,6 @@
   - name: " (6)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: "<div style=\"margin: auto; \">\n\n<a style=\"\n\n\tcolor: #fff;\n\n\
       \    background-color: #4285F4;\n\n    border-color: #4285F4;\n\n    float:\
       \ left;\n\n    font-weight: 400;\n\n    text-align: center;\n\n    vertical-align:\
@@ -174,7 +168,6 @@
   - name: " (7)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: '<h1 style="margin-top:20px; padding: 5px; border-bottom: solid 1px
       #412399; height: 60px; color: #412399; text-align: center;">Dashboard Title</h1>'
     row: 9
@@ -184,7 +177,6 @@
   - name: " (8)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: |
       <div style="border-radius: 5px; padding: 5px 10px; background: #412399; height: 60px; color: red;">
 
@@ -212,7 +204,6 @@
   - name: " (9)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: "<div style=\"font-size: 18px; padding: 5px 10px 0 10px;\">\n\n\t<a\
       \ style='display: block; border-radius: 5px; padding: 5px 10px; margin-bottom:\
       \ 10px; font-weight: bold; background-color: #eaf1fe; border: solid 1px #4285F4;'\
@@ -228,7 +219,6 @@
   - name: " (10)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: |-
       <div style='background-color: #ffffdd; padding: 5px 10px; border: solid 1px #ededed; border-radius: 5px;'>
 
@@ -246,7 +236,6 @@
   - name: " (11)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: |
       <div style="border: solid 1px #4285F4; border-radius: 5px; padding: 5px 10px; background: #eaf1fe; height: 60px">
 
@@ -315,15 +304,67 @@
     totals_color: "#808080"
     defaults_version: 1
     series_types: {}
+    listen: {}
     row: 18
     col: 16
     width: 8
     height: 4
   - type: button
-    name: button_157
+    name: button_336
     rich_content_json: '{"text":"Video guide - GCS Bucket","description":"Training
       video","newTab":true,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"https://storage.googleapis.com/public_bucket_hc/section%201.mp4"}'
     row: 0
     col: 0
     width: 24
     height: 1
+  - title: navigation_buttons
+    name: navigation_buttons
+    model: haengeun_case_study
+    explore: order_items
+    type: single_value
+    fields: [products.navigation_buttons]
+    fill_fields: [products.navigation_buttons]
+    sorts: [products.navigation_buttons]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    series_types: {}
+    row: 23
+    col: 0
+    width: 24
+    height: 2

@@ -67,6 +67,26 @@ constant: currency_liquid {
 }
 
 
+constant: explore_of_choice {
+  value: "order_items_extended"
+}
+
+
+
+#####----------for THG dashboard demo -------------###
+# Define the base color
+constant: primary_brand_color {
+  value: "color:#1a73e8;"
+}
+
+# Define the alert box style, referencing the color constant
+constant: description_box_style {
+  value: "background:#eaf2fe; border-left:4px solid @{primary_brand_color}; padding:14px 18px; border-radius:0 6px 6px 0; font-size:13px; line-height:1.65; color:#1f2733; text-align: left; white-space: normal; word-wrap: break-word;font-family: 'Roboto';"
+}
+
+#####----------for THG dashboard demo -------------###
+
+
 
 
 # "padding: 5px 20px; border-top: solid 1px #0066FF; border-left: solid 1px #0066FF; border-right: solid 1px #0066FF; border-radius: 5px 5px 0 0; float: left; line-height: 40px; font-weight: bold; background-color: #FFFFFF;"" href=""#""> Accesses </a>

@@ -226,6 +226,74 @@ view: products {
   }
 
 
+# parameter: description_text {
+#     type: string
+#     label: "Textbox Content (Use | to separate Subtitle and Body)"
+#     # Example Input: Subtitle here | This will be the main body text.
+# }
+
+#   dimension: description_box {
+#     type: string
+#     sql: {% parameter description_text %} ;;
+#     html:
+#     {% assign parts = value | split: "|" %}
+#     <div style="@{description_box_style}">
+#     {% if parts.size > 1 %}
+#     <div style="color: #0066cc; font-weight: bold; margin-bottom: 5px;">{{ parts[0] }}</div>
+#     <div style="font-style: italic;">{{ parts[1] }}</div>
+#     {% else %}
+#     <div style="font-style: italic;">{{ value }}</div>
+#     {% endif %}
+#     </div> ;;
+#   }
+
+
+
+  parameter: description_text {
+    type: string
+    label: "Textbox Content"
+  }
+
+  dimension: description_box {
+    type: string
+    # Using the parameter here ensures the dimension has a value to render
+    sql: {% parameter description_text %} ;;
+
+    html:
+      {% assign input_val = value %}
+      <div style="@{description_box_style}">
+        {% assign sections = input_val | split: ";" %}
+
+        {% for section in sections %}
+          {% assign parts = section | split: "|" %}
+
+          <div style="margin-bottom: 15px;">
+            {% if parts.size > 1 %}
+              <div style="color: #0066cc; font-weight: bold; margin-bottom: 2px;">{{ parts[0] | strip }}</div>
+              <div style="font-style: italic;">{{ parts[1] | strip }}</div>
+            {% else %}
+              <div style="font-style: italic;">{{ section | strip }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div> ;;
+  }
+
+
+  # dimension: description_box {
+  #   type: string
+  #   sql: ' ' ;;
+  #   html:
+  #   <div style="@{description_box_style}">
+  #     <b style="@{primary_brand_color}">S.19 EA commitment tracker</b> - actual spend against the contracted period target in USD. Components: Platform DC (the bulk of GCP services billing minus Support / minus marketplace-vendor rows), TSS (Support service), Marketplace (finance-confirmed marketplace spend), and the four contracted services (SCC, Mandiant, Apigee, Looker). Months beyond the actuals horizon use a finance-modelled projection.<br><br>
+  #     <b style="@{primary_brand_color}">Headline.</b> The four KPIs read left-to-right: where we stand today (<i>Total Spend to Date</i>), what we promised Google (<i>Period Target</i>), the gap (<i>Remaining Commitment</i>), and our run-rate signal (<i>Projected % to Target</i>) - folds in the finance projection for forward months.<br><br>
+  #     <b style="@{primary_brand_color}">Burn curve.</b> Cumulative actuals vs the target trajectory month-by-month. If actuals trail the target line we're behind pace; if they overshoot we'll exceed the commitment. The projection line continues forward to show where finance currently models the period ending.<br><br>
+  #     <b style="@{primary_brand_color}">Component mix.</b> Where the spend is concentrated across the seven components. Apigee and Looker only start contributing partway through P1 (months 7 and 9 respectively).<br><br>
+  #     <b style="@{primary_brand_color}">Period selection.</b> By default the Period filter is empty so every tile reflects the full S.19 commitment across P1-P5 (84 months Oct 2025 + Sep 2032). Tag-pick one or more periods to scope the KPIs, burn curve, and component view to that slice. The "All periods overview" table at the bottom always shows all five periods regardless of filter.
+  #   </div> ;;
+  # }
+
+
   dimension: url_show{
     type: string
     html:  check {{ _view._name }} ;;
